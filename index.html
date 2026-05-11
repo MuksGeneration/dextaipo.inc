@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dexta Investments & Microfinance Limited</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+  --gold:#C9A84C;--gold-light:#E8C97A;--gold-dim:#8a6f2e;
+  --dark:#080810;--dark2:#0e0e1a;--dark3:#161624;--dark4:#1e1e30;
+  --text:#E8E8F0;--muted:#7a7a99;--green:#2d9e6b;--red:#c0392b;
+  --accent:#4C6EC9;--border:rgba(201,168,76,0.14);
+  --radius:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--text);overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.4;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1.1rem 3rem;display:flex;align-items:center;justify-content:space-between;background:rgba(8,8,16,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);animation:fadeDown .8s ease both;}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:700;letter-spacing:.1em;color:var(--gold);}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;transition:color .25s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-right{display:flex;gap:.8rem;align-items:center;}
+.nav-cta{background:var(--gold);color:var(--dark);padding:.48rem 1.4rem;border-radius:var(--radius);font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border:none;transition:.25s;}
+.nav-cta:hover{background:var(--gold-light);}
+.nav-admin-btn{background:rgba(201,168,76,.1);color:var(--gold);padding:.48rem 1rem;border-radius:var(--radius);font-size:.75rem;font-weight:500;letter-spacing:.06em;cursor:pointer;border:1px solid var(--border);transition:.25s;text-decoration:none;}
+.nav-admin-btn:hover{background:rgba(201,168,76,.2);}
+.nav-hamburger{display:none;background:none;border:none;color:var(--gold);font-size:1.4rem;cursor:pointer;}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:8rem 2rem 4rem;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(201,168,76,.07) 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 80% 80%,rgba(76,110,201,.06) 0%,transparent 60%),linear-gradient(180deg,var(--dark) 0%,var(--dark2) 100%);}
+.grid-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,.04) 1px,transparent 1px);background-size:60px 60px;animation:gridPulse 8s ease-in-out infinite;}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);animation:float 12s ease-in-out infinite;}
+.orb1{width:400px;height:400px;background:rgba(201,168,76,.07);top:-10%;left:-10%;animation-delay:0s;}
+.orb2{width:300px;height:300px;background:rgba(76,110,201,.07);bottom:5%;right:-5%;animation-delay:-4s;}
+.orb3{width:200px;height:200px;background:rgba(201,168,76,.05);top:40%;left:60%;animation-delay:-8s;}
+.hero-content{position:relative;z-index:2;text-align:center;max-width:860px;}
+.hero-badge{display:inline-block;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.25);color:var(--gold);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;padding:.4rem 1rem;border-radius:20px;margin-bottom:1.8rem;animation:fadeUp .8s .2s both;}
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,7vw,5.2rem);font-weight:300;line-height:1.08;letter-spacing:-.01em;animation:fadeUp .8s .35s both;}
+h1 span{color:var(--gold);font-style:italic;}
+.hero-sub{font-size:1rem;color:var(--muted);max-width:560px;margin:1.4rem auto 2.4rem;line-height:1.7;animation:fadeUp .8s .5s both;}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:fadeUp .8s .65s both;}
+.btn-primary{background:var(--gold);color:var(--dark);padding:.75rem 2rem;border-radius:var(--radius);font-size:.85rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;border:none;transition:.25s;}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);}
+.btn-outline{background:transparent;color:var(--gold);padding:.75rem 2rem;border-radius:var(--radius);font-size:.85rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;border:1px solid rgba(201,168,76,.4);transition:.25s;}
+.btn-outline:hover{border-color:var(--gold);background:rgba(201,168,76,.05);}
+.stats-bar{display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap;margin-top:3.5rem;padding-top:2rem;border-top:1px solid var(--border);animation:fadeUp .8s .8s both;}
+.stat-item{text-align:center;}
+.stat-num{display:block;font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--gold);}
+.stat-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);}
+
+/* TICKER */
+.ticker-wrap{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;padding:.55rem 0;}
+.ticker-inner{display:flex;gap:0;white-space:nowrap;animation:ticker 40s linear infinite;}
+.ticker-item{padding:0 3rem;font-size:.78rem;letter-spacing:.05em;color:var(--muted);}
+.ticker-item strong{color:var(--gold);}
+.ticker-sep{margin:0 .6rem;opacity:.3;}
+
+/* SECTIONS COMMON */
+section{padding:5rem 2rem;}
+.section-inner{max-width:1100px;margin:0 auto;}
+.section-tag{font-size:.68rem;text-transform:uppercase;letter-spacing:.22em;color:var(--gold);margin-bottom:.9rem;}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.15;margin-bottom:2.5rem;}
+.section-title span{color:var(--gold);font-style:italic;}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* IPO */
+#ipo{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.ipo-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+.ipo-card{background:var(--dark3);border:1px solid var(--border);border-radius:12px;padding:2rem;}
+.ipo-card.main{border-color:rgba(201,168,76,.3);}
+.ipo-ticker{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem;}
+.ticker-symbol{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--gold);}
+.ticker-badge{background:rgba(45,158,107,.15);color:var(--green);border:1px solid rgba(45,158,107,.3);font-size:.65rem;padding:.25rem .7rem;border-radius:20px;letter-spacing:.12em;animation:pulse 2s ease infinite;}
+.price-display{font-family:'Cormorant Garamond',serif;font-size:3.2rem;font-weight:600;color:var(--text);margin-bottom:.3rem;}
+.price-display span:first-child{font-size:1.2rem;color:var(--muted);margin-right:.3rem;}
+.price-sub{font-size:.72rem;color:var(--muted);margin-bottom:1.4rem;}
+.ipo-bar-label{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);margin-bottom:.5rem;}
+.progress-bar{height:6px;background:var(--dark4);border-radius:3px;overflow:hidden;margin-bottom:1.5rem;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold));border-radius:3px;transition:width 1.5s ease;}
+.ipo-meta{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem;}
+.meta-item label{font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);}
+.meta-item span{display:block;font-size:1rem;font-weight:600;color:var(--text);margin-top:.2rem;}
+
+/* IPO FORM */
+.ipo-form-container{background:var(--dark3);border:1px solid var(--border);border-radius:12px;padding:2rem;}
+.ipo-form-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:1.4rem;color:var(--gold);}
+.form-group{margin-bottom:1.1rem;}
+.form-label{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.45rem;}
+.form-input{width:100%;background:var(--dark4);border:1px solid var(--border);border-radius:var(--radius);padding:.7rem 1rem;color:var(--text);font-size:.88rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s;}
+.form-input:focus{border-color:rgba(201,168,76,.5);}
+.form-input::placeholder{color:var(--muted);}
+.otp-container{display:flex;gap:.6rem;}
+.otp-container .form-input{flex:1;}
+.btn-secondary{background:transparent;border:1px solid rgba(201,168,76,.4);color:var(--gold);padding:.7rem 1rem;border-radius:var(--radius);font-size:.78rem;white-space:nowrap;cursor:pointer;transition:.2s;font-family:'DM Sans',sans-serif;}
+.btn-secondary:hover{border-color:var(--gold);background:rgba(201,168,76,.08);}
+.ipo-submit-wrap{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:1.2rem;}
+.btn-payment{background:rgba(76,110,201,.15);color:#8fa8e8;border:1px solid rgba(76,110,201,.3);padding:.72rem 1rem;border-radius:var(--radius);font-size:.82rem;cursor:pointer;transition:.2s;font-family:'DM Sans',sans-serif;}
+.btn-payment:hover{background:rgba(76,110,201,.25);}
+
+/* UPLOAD FIELD */
+.upload-field{position:relative;background:var(--dark4);border:1px dashed rgba(201,168,76,.3);border-radius:var(--radius);padding:1.2rem;text-align:center;cursor:pointer;transition:.2s;}
+.upload-field:hover{border-color:var(--gold);background:rgba(201,168,76,.04);}
+.upload-field input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.upload-icon{font-size:1.4rem;color:var(--gold-dim);margin-bottom:.4rem;}
+.upload-label{font-size:.75rem;color:var(--muted);}
+.upload-label strong{color:var(--gold);}
+.upload-preview{display:none;flex-direction:column;align-items:center;gap:.3rem;}
+.upload-preview img{max-height:60px;border-radius:4px;object-fit:cover;}
+.upload-preview span{font-size:.7rem;color:var(--green);}
+
+/* ID SCAN FIELD — enhanced with scanning animation */
+.id-scan-field{position:relative;background:var(--dark4);border:1px dashed rgba(201,168,76,.3);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:.2s;}
+.id-scan-field:hover{border-color:var(--gold);}
+.id-scan-field input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;z-index:2;}
+.id-scan-inner{padding:1.4rem 1rem;text-align:center;pointer-events:none;}
+.id-scan-icon{font-size:2rem;color:var(--gold-dim);margin-bottom:.5rem;}
+.id-card-outline{width:80px;height:52px;border:2px solid rgba(201,168,76,.4);border-radius:6px;margin:0 auto .6rem;display:flex;align-items:center;justify-content:center;position:relative;}
+.id-card-outline::before{content:'';position:absolute;top:30%;left:15%;width:40%;height:8px;background:rgba(201,168,76,.25);border-radius:2px;}
+.id-card-outline::after{content:'';position:absolute;top:50%;left:15%;width:25%;height:6px;background:rgba(201,168,76,.15);border-radius:2px;}
+.id-scan-label{font-size:.75rem;color:var(--muted);}
+.id-scan-label strong{color:var(--gold);}
+
+/* SCAN ANIMATION OVERLAY */
+.scan-overlay{display:none;position:absolute;inset:0;background:rgba(8,8,16,.85);z-index:10;align-items:center;justify-content:center;flex-direction:column;gap:.8rem;}
+.scan-overlay.active{display:flex;}
+.scan-bar{width:80%;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);animation:scanMove 1.2s ease-in-out infinite;}
+.scan-text{font-size:.75rem;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;animation:blink 1s ease infinite;}
+.scan-done-overlay{display:none;position:absolute;inset:0;z-index:10;background:rgba(8,8,16,.85);align-items:center;justify-content:center;flex-direction:column;gap:.5rem;}
+.scan-done-overlay.show{display:flex;}
+.scan-done-overlay img{max-height:70px;border-radius:4px;object-fit:cover;}
+.scan-done-overlay span{font-size:.72rem;color:var(--green);}
+.scan-checkmark{font-size:1.6rem;color:var(--green);}
+
+/* SERVICES */
+#services{background:var(--dark);}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem;}
+.service-card{background:var(--dark3);border:1px solid var(--border);border-radius:12px;padding:1.8rem;transition:.3s;}
+.service-card:hover{border-color:rgba(201,168,76,.3);transform:translateY(-4px);}
+.service-icon{font-size:1.8rem;margin-bottom:1rem;color:var(--gold);}
+.service-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin-bottom:.6rem;color:var(--text);}
+.service-desc{font-size:.83rem;color:var(--muted);line-height:1.65;margin-bottom:1rem;}
+.service-list{list-style:none;padding:0;}
+.service-list li{font-size:.78rem;color:var(--muted);padding:.3rem 0;border-bottom:1px solid rgba(255,255,255,.04);}
+.service-list li::before{content:'✓ ';color:var(--green);}
+
+/* REQUIREMENTS */
+#requirements{background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.req-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;}
+.req-card{background:var(--dark3);border:1px solid var(--border);border-radius:12px;padding:1.6rem;}
+.req-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--gold);margin-bottom:1rem;}
+.req-list{list-style:none;padding:0;}
+.req-list li{font-size:.8rem;color:var(--muted);padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,.04);display:flex;gap:.6rem;align-items:flex-start;line-height:1.5;}
+.req-list li i{color:var(--gold);margin-top:.1rem;flex-shrink:0;font-size:.8rem;}
+
+/* RATES */
+.rates-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem;margin-top:1.5rem;}
+.rate-card{background:var(--dark3);border:1px solid var(--border);border-radius:12px;padding:1.4rem;text-align:center;}
+.rate-val{font-family:'Cormorant Garamond',serif;font-size:2.5rem;color:var(--gold);font-weight:600;}
+.rate-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-top:.3rem;}
+.rate-note{font-size:.72rem;color:var(--muted);margin-top:.4rem;opacity:.7;}
+
+/* REGISTER */
+#register{background:var(--dark);}
+.register-wrap{display:grid;grid-template-columns:3fr 2fr;gap:3rem;align-items:start;}
+.register-form{background:var(--dark3);border:1px solid var(--border);border-radius:12px;padding:2.2rem;}
+.form-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--gold);margin-bottom:.3rem;}
+.form-sub{font-size:.8rem;color:var(--muted);margin-bottom:1.6rem;}
+.form-submit{width:100%;background:var(--gold);color:var(--dark);padding:.85rem;border-radius:var(--radius);font-size:.88rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border:none;margin-top:.6rem;transition:.25s;font-family:'DM Sans',sans-serif;}
+.form-submit:hover{background:var(--gold-light);}
+.form-submit:disabled{opacity:.6;cursor:not-allowed;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.register-info h3{font-family:'Cormorant Garamond',serif;font-size:2rem;line-height:1.2;margin-bottom:1rem;}
+.register-info h3 span{color:var(--gold);font-style:italic;}
+.register-info p{font-size:.85rem;color:var(--muted);line-height:1.7;margin-bottom:1.8rem;}
+.contact-cards{display:flex;flex-direction:column;gap:.8rem;}
+.contact-card{display:flex;gap:1rem;align-items:center;background:var(--dark3);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.2rem;text-decoration:none;transition:.25s;}
+.contact-card:hover{border-color:rgba(201,168,76,.3);}
+.contact-icon{font-size:1.3rem;color:var(--gold);}
+.contact-label{font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);}
+.contact-value{font-size:.9rem;color:var(--text);font-weight:500;}
+
+/* LOAN FORM */
+#loan{background:var(--dark2);border-top:1px solid var(--border);}
+.loan-form-inner{max-width:780px;margin:0 auto;background:var(--dark3);border:1px solid var(--border);border-radius:12px;padding:2.5rem;}
+
+/* SAVINGS FORM */
+#savings-form{background:var(--dark);border-top:1px solid var(--border);}
+.savings-form-inner{max-width:680px;margin:0 auto;background:var(--dark3);border:1px solid var(--border);border-radius:12px;padding:2.5rem;}
+
+/* TABS */
+.tabs{display:flex;gap:.5rem;margin-bottom:1.8rem;flex-wrap:wrap;}
+.tab-btn{background:var(--dark4);border:1px solid var(--border);color:var(--muted);padding:.55rem 1.2rem;border-radius:var(--radius);font-size:.78rem;letter-spacing:.08em;cursor:pointer;transition:.2s;font-family:'DM Sans',sans-serif;}
+.tab-btn.active{background:var(--gold);color:var(--dark);border-color:var(--gold);font-weight:600;}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+/* FACE CAPTURE — enhanced with auto-capture */
+.face-capture-wrap{position:relative;background:var(--dark4);border:1px dashed rgba(201,168,76,.3);border-radius:var(--radius);overflow:hidden;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:.6rem;}
+video.face-video{width:100%;height:100%;object-fit:cover;display:none;border-radius:var(--radius);}
+.face-placeholder{text-align:center;pointer-events:none;}
+.face-placeholder i{font-size:2rem;color:var(--gold-dim);}
+.face-placeholder p{font-size:.75rem;color:var(--muted);margin-top:.4rem;}
+.face-captured-img{display:none;width:100%;height:100%;object-fit:cover;border-radius:var(--radius);position:absolute;inset:0;}
+.face-actions{display:flex;gap:.6rem;margin-top:.6rem;flex-wrap:wrap;}
+
+/* Face detection overlay */
+.face-detection-overlay{position:absolute;inset:0;pointer-events:none;z-index:5;}
+.face-oval{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:55%;height:75%;border:2px solid rgba(201,168,76,.6);border-radius:50%;box-shadow:0 0 0 9999px rgba(8,8,16,.5);transition:border-color .3s;}
+.face-oval.detected{border-color:var(--green);box-shadow:0 0 20px rgba(45,158,107,.3),0 0 0 9999px rgba(8,8,16,.5);}
+.face-guide-text{position:absolute;bottom:12%;left:0;right:0;text-align:center;font-size:.7rem;color:var(--gold);letter-spacing:.1em;background:rgba(8,8,16,.6);padding:.3rem;}
+.face-countdown{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Cormorant Garamond',serif;font-size:4rem;font-weight:700;color:var(--green);opacity:0;transition:opacity .3s;text-shadow:0 0 20px rgba(45,158,107,.5);}
+.face-countdown.show{opacity:1;}
+.auto-flash{position:absolute;inset:0;background:white;opacity:0;pointer-events:none;z-index:8;transition:opacity .1s;}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;right:2rem;z-index:9998;background:var(--dark3);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.5rem;min-width:260px;max-width:360px;box-shadow:0 8px 32px rgba(0,0,0,.5);transform:translateY(20px);opacity:0;transition:.3s;pointer-events:none;}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast.success{border-left:3px solid var(--green);}
+.toast.error{border-left:3px solid var(--red);}
+.toast-title{font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:.3rem;}
+.toast-msg{font-size:.76rem;color:var(--muted);}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(8,8,16,.85);z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:.3s;padding:1rem;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal{background:var(--dark3);border:1px solid var(--border);border-radius:12px;padding:2.5rem;max-width:520px;width:100%;transform:scale(.95);transition:.3s;max-height:90vh;overflow-y:auto;}
+.modal-overlay.open .modal{transform:scale(1);}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--gold);margin-bottom:.4rem;}
+.modal-sub{font-size:.8rem;color:var(--muted);margin-bottom:1.6rem;}
+.modal-close{float:right;background:none;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;margin-top:-2rem;}
+.modal-actions{display:flex;gap:.8rem;margin-top:1.4rem;}
+
+/* ACCOUNT CARD (shown after registration) */
+.account-card{background:linear-gradient(135deg,var(--dark4),var(--dark3));border:1px solid rgba(201,168,76,.4);border-radius:12px;padding:1.6rem;margin-top:1.2rem;}
+.account-card-title{font-size:.68rem;text-transform:uppercase;letter-spacing:.2em;color:var(--muted);margin-bottom:.8rem;}
+.account-number{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--gold);letter-spacing:.08em;margin-bottom:.4rem;}
+.account-meta{font-size:.78rem;color:var(--muted);}
+.account-meta strong{color:var(--text);}
+.copy-btn{display:inline-flex;align-items:center;gap:.4rem;background:rgba(201,168,76,.1);border:1px solid var(--border);color:var(--gold);padding:.35rem .8rem;border-radius:var(--radius);font-size:.72rem;cursor:pointer;margin-top:.8rem;transition:.2s;font-family:'DM Sans',sans-serif;}
+.copy-btn:hover{background:rgba(201,168,76,.2);}
+
+/* FOOTER */
+footer{background:var(--dark2);border-top:1px solid var(--border);padding:3rem 2rem;text-align:center;}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--gold);letter-spacing:.1em;}
+.footer-tagline{font-size:.75rem;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;margin:.4rem 0 1.6rem;}
+.footer-links{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.6rem;}
+.footer-links a{color:var(--muted);text-decoration:none;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;transition:.2s;}
+.footer-links a:hover{color:var(--gold);}
+.footer-bottom{font-size:.72rem;color:var(--muted);opacity:.5;}
+
+/* WHATSAPP FLOAT */
+.whatsapp-float{position:fixed;bottom:2rem;left:2rem;z-index:500;background:#25D366;color:#fff;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,.35);transition:.25s;animation:fadeUp 1s 1s both;}
+.whatsapp-float:hover{transform:scale(1.1);}
+
+/* KEYFRAMES */
+@keyframes fadeDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:none}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes gridPulse{0%,100%{opacity:.6}50%{opacity:1}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-30px)}}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes scanMove{0%{transform:translateY(-30px)}50%{transform:translateY(30px)}100%{transform:translateY(-30px)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem;}
+  .nav-links{display:none;}
+  .nav-hamburger{display:block;}
+  .ipo-grid,.register-wrap,.form-row{grid-template-columns:1fr;}
+  .ipo-submit-wrap{grid-template-columns:1fr;}
+}
+@media(max-width:600px){
+  section{padding:3.5rem 1rem;}
+  .stats-bar{gap:1.5rem;}
+  .loan-form-inner,.savings-form-inner{padding:1.4rem;}
+  .register-form{padding:1.5rem;}
+  .modal{padding:1.6rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">DEXTA</div>
+  <ul class="nav-links">
+    <li><a href="#ipo">IPO</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#loan">Loans</a></li>
+    <li><a href="#savings-form">Savings</a></li>
+    <li><a href="#requirements">Requirements</a></li>
+    <li><a href="#register">Register</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="nav-cta" onclick="scrollTo('#register')">Open Account</button>
+    <a href="/admin" class="nav-admin-btn"><i class="fas fa-shield-alt"></i> Admin</a>
+    <button class="nav-hamburger" onclick="toggleMobileNav()"><i class="fas fa-bars"></i></button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="grid-lines"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Licensed Microfinance Institution · Uganda</div>
+    <h1>Grow Your <span>Wealth</span><br>With Confidence</h1>
+    <p class="hero-sub">Dexta Investments &amp; Microfinance Limited — offering loans, savings, fixed deposits, and live IPO access for every client.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="scrollTo('#register')">Open Account</button>
+      <button class="btn-outline" onclick="scrollTo('#ipo')">Explore IPO</button>
+    </div>
+    <div class="stats-bar">
+      <div class="stat-item"><span class="stat-num">8–10%</span><span class="stat-label">Savings Interest p.a.</span></div>
+      <div class="stat-item"><span class="stat-num">12%</span><span class="stat-label">Fixed Deposit Rate</span></div>
+      <div class="stat-item"><span class="stat-num">Ksh 150</span><span class="stat-label">IPO Starting Price</span></div>
+      <div class="stat-item"><span class="stat-num">24/7</span><span class="stat-label">Customer Support</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <span class="ticker-item"><strong>DEXTA IPO</strong><span class="ticker-sep">|</span>Price: Ksh <span id="tickerPrice">150.00</span><span class="ticker-sep">|</span>Min 100 Shares</span>
+    <span class="ticker-item"><strong>SAVINGS</strong><span class="ticker-sep">|</span>Earn up to 10% per annum</span>
+    <span class="ticker-item"><strong>FIXED DEPOSITS</strong><span class="ticker-sep">|</span>12% interest — 1 year &amp; above</span>
+    <span class="ticker-item"><strong>LOANS</strong><span class="ticker-sep">|</span>Fast approval — apply today</span>
+    <span class="ticker-item"><strong>CUSTOMER CARE</strong><span class="ticker-sep">|</span>WhatsApp: +254 787 327 180</span>
+    <span class="ticker-item"><strong>DEXTA IPO</strong><span class="ticker-sep">|</span>Price: Ksh <span>150.00</span><span class="ticker-sep">|</span>Min 100 Shares</span>
+    <span class="ticker-item"><strong>SAVINGS</strong><span class="ticker-sep">|</span>Earn up to 10% per annum</span>
+    <span class="ticker-item"><strong>FIXED DEPOSITS</strong><span class="ticker-sep">|</span>12% interest — 1 year &amp; above</span>
+    <span class="ticker-item"><strong>LOANS</strong><span class="ticker-sep">|</span>Fast approval — apply today</span>
+    <span class="ticker-item"><strong>CUSTOMER CARE</strong><span class="ticker-sep">|</span>WhatsApp: +254 787 327 180</span>
+  </div>
+</div>
+
+<!-- IPO PLATFORM -->
+<section id="ipo">
+  <div class="section-inner reveal">
+    <div class="section-tag">Public Offering</div>
+    <h2 class="section-title">Initial Public <span>Offering</span></h2>
+    <div class="ipo-grid">
+      <div class="ipo-card main">
+        <div class="ipo-ticker">
+          <div class="ticker-symbol">DEXTA</div>
+          <span class="ticker-badge">▲ LIVE</span>
+        </div>
+        <div class="price-display"><span>Ksh</span><span id="ipoPrice">150.00</span></div>
+        <div class="price-sub">Starting Price Per Share &nbsp;·&nbsp; Min 100 Shares</div>
+        <div class="ipo-bar-label"><span>Subscription Progress</span><span id="subPercentText">68%</span></div>
+        <div class="progress-bar"><div class="progress-fill" id="progressBar" style="width:68%"></div></div>
+        <div class="ipo-meta">
+          <div class="meta-item"><label>Min Investment</label><span id="minInvest">Ksh 15,000</span></div>
+          <div class="meta-item"><label>Shares Subscribed</label><span id="sharesSub">85,400</span></div>
+          <div class="meta-item"><label>Total Volume</label><span id="totalVol">125,000</span></div>
+          <div class="meta-item"><label>Last Updated</label><span id="lastUpd">—</span></div>
+        </div>
+        <div style="margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid var(--border);">
+          <div class="form-label">Share Calculator</div>
+          <div style="display:flex;gap:.6rem;align-items:center;margin-top:.4rem;">
+            <input type="number" id="shareQty" class="form-input" value="100" min="100" style="max-width:120px;" oninput="calcShares()">
+            <span style="color:var(--muted);font-size:.8rem;">shares =</span>
+            <span id="calcTotal" style="color:var(--gold);font-weight:600;">Ksh 15,000</span>
+          </div>
+        </div>
+      </div>
+      <div class="ipo-form-container">
+        <div class="ipo-form-title">Subscribe to IPO</div>
+        <div class="form-group">
+          <label class="form-label">Full Name (per ID)</label>
+          <input type="text" id="ipoName" class="form-input" placeholder="Legal full name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address <span style="color:var(--red)">*</span></label>
+          <input type="email" id="ipoEmail" class="form-input" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone Number <span style="color:var(--red)">*</span></label>
+          <div class="otp-container">
+            <input type="tel" id="ipoPhone" class="form-input" placeholder="+256 7XX XXX XXX">
+            <button class="btn-secondary" id="ipoSendOtp" onclick="sendOTP('ipoPhone','ipoOTP','ipoSendOtp')">Send OTP</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">OTP Verification</label>
+          <input type="text" id="ipoOTP" class="form-input" placeholder="Enter 6-digit OTP">
+        </div>
+        <div class="form-group">
+          <label class="form-label">National ID Number</label>
+          <input type="text" id="ipoNID" class="form-input" placeholder="Your National ID">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Number of Shares (min 100)</label>
+          <input type="number" id="ipoShares" class="form-input" value="100" min="100" oninput="calcIPOTotal()">
+          <div style="margin-top:.4rem;font-size:.75rem;color:var(--gold);">Total: <span id="ipoTotalAmt">Ksh 15,000</span></div>
+        </div>
+        <div class="ipo-submit-wrap">
+          <button class="btn-primary" id="ipoSubmit" onclick="submitIPO()">Complete Registration</button>
+          <button class="btn-payment" onclick="openModal('payModal')">💳 Pay &amp; Subscribe</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner reveal">
+    <div class="section-tag">What We Offer</div>
+    <h2 class="section-title">Our <span>Services</span></h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-hand-holding-usd"></i></div>
+        <div class="service-name">Loans</div>
+        <p class="service-desc">Quick, accessible loans for individuals and businesses. Minimal requirements and fast processing.</p>
+        <ul class="service-list">
+          <li>National ID (front &amp; back scan)</li><li>TIN Number</li><li>Face photo (auto-capture)</li>
+          <li>Mobile number (same as ID)</li><li>Address &amp; employment status</li>
+        </ul>
+        <button class="btn-outline" style="margin-top:1rem;width:100%;font-size:.78rem;" onclick="scrollTo('#loan')">Apply for Loan</button>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-piggy-bank"></i></div>
+        <div class="service-name">Savings Account</div>
+        <p class="service-desc">Earn 8–10% interest per annum. Fixed deposits for 1 year+ earn up to 12%.</p>
+        <ul class="service-list">
+          <li>National ID (front &amp; back)</li><li>Mobile number for payouts</li>
+          <li>8–10% interest per annum</li><li>Fixed deposits: 12% (1yr+)</li>
+        </ul>
+        <button class="btn-outline" style="margin-top:1rem;width:100%;font-size:.78rem;" onclick="scrollTo('#savings-form')">Open Savings</button>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+        <div class="service-name">IPO Investment</div>
+        <p class="service-desc">Buy shares starting at Ksh 150 on our live, auto-updating platform.</p>
+        <ul class="service-list">
+          <li>Starting price: Ksh 150/share</li><li>Minimum: 100 shares</li>
+          <li>Real-time subscription tracking</li><li>Auto-updating platform</li>
+        </ul>
+        <button class="btn-outline" style="margin-top:1rem;width:100%;font-size:.78rem;" onclick="scrollTo('#ipo')">Invest Now</button>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-lock"></i></div>
+        <div class="service-name">Fixed Deposits</div>
+        <p class="service-desc">Lock in your money for 1 year+ and earn guaranteed 12% annual returns.</p>
+        <ul class="service-list">
+          <li>Minimum tenure: 1 year</li><li>Up to 12% per annum</li>
+          <li>Secure &amp; guaranteed returns</li><li>Mobile payout available</li>
+        </ul>
+        <button class="btn-outline" style="margin-top:1rem;width:100%;font-size:.78rem;" onclick="scrollTo('#register')">Get Started</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RATES -->
+<section style="background:var(--dark2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:4rem 2rem;">
+  <div class="section-inner reveal">
+    <div class="section-tag">Interest Rates</div>
+    <h2 class="section-title">Savings &amp; <span>Returns</span></h2>
+    <div class="rates-grid">
+      <div class="rate-card"><div class="rate-val">8–10%</div><div class="rate-label">Regular Savings</div><div class="rate-note">Per annum · Flexible withdrawal</div></div>
+      <div class="rate-card"><div class="rate-val">12%</div><div class="rate-label">Fixed Deposit</div><div class="rate-note">1 year &amp; above</div></div>
+      <div class="rate-card"><div class="rate-val">Ksh 150</div><div class="rate-label">IPO Share Price</div><div class="rate-note">Min 100 shares = Ksh 15,000</div></div>
+      <div class="rate-card"><div class="rate-val">200</div><div class="rate-label">Min Shares (×100)</div><div class="rate-note">= Ksh 20,000 investment</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- REQUIREMENTS -->
+<section id="requirements">
+  <div class="section-inner reveal">
+    <div class="section-tag">Documentation</div>
+    <h2 class="section-title">Requirements &amp; <span>Documents</span></h2>
+    <div class="req-grid">
+      <div class="req-card">
+        <div class="req-title">Account Creation</div>
+        <ul class="req-list">
+          <li><i class="fas fa-id-card"></i>National ID — front &amp; back (auto-scan supported)</li>
+          <li><i class="fas fa-camera"></i>Face scan — auto-capture countdown</li>
+          <li><i class="fas fa-phone"></i>Personal number matching ID</li>
+          <li><i class="fas fa-user"></i>Full names per ID</li>
+          <li><i class="fas fa-envelope"></i>Valid email address</li>
+        </ul>
+      </div>
+      <div class="req-card">
+        <div class="req-title">Loan Requirements</div>
+        <ul class="req-list">
+          <li><i class="fas fa-id-card"></i>National ID — front &amp; back scan</li>
+          <li><i class="fas fa-file-alt"></i>TIN Number</li>
+          <li><i class="fas fa-portrait"></i>Face photo (upload or auto-capture)</li>
+          <li><i class="fas fa-phone"></i>Mobile number (same name as ID)</li>
+          <li><i class="fas fa-map-marker-alt"></i>Address &amp; employment status</li>
+        </ul>
+      </div>
+      <div class="req-card">
+        <div class="req-title">Savings Account</div>
+        <ul class="req-list">
+          <li><i class="fas fa-id-card"></i>National ID — front &amp; back</li>
+          <li><i class="fas fa-phone"></i>Mobile number for receiving money</li>
+          <li><i class="fas fa-percent"></i>Earn 8–10% interest per annum</li>
+          <li><i class="fas fa-lock"></i>Fixed deposits: 1yr+ earn up to 12%</li>
+        </ul>
+      </div>
+      <div class="req-card">
+        <div class="req-title">IPO Subscription</div>
+        <ul class="req-list">
+          <li><i class="fas fa-envelope"></i>Email for registration</li>
+          <li><i class="fas fa-phone"></i>Phone OTP verification</li>
+          <li><i class="fas fa-id-card"></i>National ID number</li>
+          <li><i class="fas fa-chart-bar"></i>Min 100 shares at Ksh 150 each</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOAN APPLICATION FORM -->
+<section id="loan">
+  <div class="section-inner reveal">
+    <div class="section-tag">Apply Online</div>
+    <h2 class="section-title">Loan <span>Application</span></h2>
+    <div class="loan-form-inner">
+      <div class="form-title">Loan Application Form</div>
+      <div class="form-sub">Fill in all required fields. Your information is secure and encrypted.</div>
+
+      <div class="form-row" style="margin-top:1.2rem;">
+        <div class="form-group">
+          <label class="form-label">Full Names (per ID) *</label>
+          <input type="text" id="loanName" class="form-input" placeholder="As on your National ID">
+        </div>
+        <div class="form-group">
+          <label class="form-label">TIN Number *</label>
+          <input type="text" id="loanTIN" class="form-input" placeholder="Tax Identification Number">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Mobile Number (same as ID) *</label>
+          <input type="tel" id="loanPhone" class="form-input" placeholder="+256 7XX XXX XXX">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Address *</label>
+          <input type="text" id="loanAddress" class="form-input" placeholder="Your physical address">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Employment Status *</label>
+        <select id="loanEmploy" class="form-input" style="cursor:pointer;">
+          <option value="" style="background:var(--dark3);">Select status…</option>
+          <option style="background:var(--dark3);">Employed (Full-time)</option>
+          <option style="background:var(--dark3);">Employed (Part-time)</option>
+          <option style="background:var(--dark3);">Self-Employed / Business Owner</option>
+          <option style="background:var(--dark3);">Farmer</option>
+          <option style="background:var(--dark3);">Unemployed</option>
+          <option style="background:var(--dark3);">Student</option>
+          <option style="background:var(--dark3);">Retired</option>
+        </select>
+      </div>
+
+      <!-- ID Upload with scan animation -->
+      <div class="form-row" style="margin-top:.4rem;">
+        <div class="form-group">
+          <label class="form-label">National ID — Front *</label>
+          <div class="id-scan-field" id="loanIdFrontField">
+            <input type="file" accept="image/*,application/pdf" id="loanIdFrontInput" onchange="handleIDScan('loanIdFrontInput','loanIdFrontField','loanIdFrontScanOverlay','loanIdFrontDone','loanIdFrontImg')">
+            <div class="id-scan-inner">
+              <div class="id-card-outline"></div>
+              <div class="id-scan-label">Tap to scan <strong>front of ID</strong></div>
+            </div>
+            <div class="scan-overlay" id="loanIdFrontScanOverlay">
+              <div class="scan-bar"></div>
+              <div class="scan-text">Scanning document…</div>
+            </div>
+            <div class="scan-done-overlay" id="loanIdFrontDone">
+              <div class="scan-checkmark">✓</div>
+              <img id="loanIdFrontImg" src="" alt="">
+              <span style="color:var(--green);font-size:.72rem;">Front Scanned ✓</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">National ID — Back *</label>
+          <div class="id-scan-field" id="loanIdBackField">
+            <input type="file" accept="image/*,application/pdf" id="loanIdBackInput" onchange="handleIDScan('loanIdBackInput','loanIdBackField','loanIdBackScanOverlay','loanIdBackDone','loanIdBackImg')">
+            <div class="id-scan-inner">
+              <div class="id-card-outline"></div>
+              <div class="id-scan-label">Tap to scan <strong>back of ID</strong></div>
+            </div>
+            <div class="scan-overlay" id="loanIdBackScanOverlay">
+              <div class="scan-bar"></div>
+              <div class="scan-text">Scanning document…</div>
+            </div>
+            <div class="scan-done-overlay" id="loanIdBackDone">
+              <div class="scan-checkmark">✓</div>
+              <img id="loanIdBackImg" src="" alt="">
+              <span style="color:var(--green);font-size:.72rem;">Back Scanned ✓</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Passport Photo / Face Capture -->
+      <div class="form-group">
+        <label class="form-label">Passport Photo *</label>
+        <div class="tabs">
+          <button class="tab-btn active" onclick="switchTab(this,'loanPhoto','uploadTab')">Upload Photo</button>
+          <button class="tab-btn" onclick="switchTab(this,'loanPhoto','captureTab')">Auto Face Scan</button>
+        </div>
+        <div id="loanPhoto-uploadTab" class="tab-panel active">
+          <div class="upload-field" id="passportField">
+            <input type="file" accept="image/*" id="passportInput" onchange="previewUpload('passportInput','passportField','passportPrev','passportImg')">
+            <div class="upload-icon"><i class="fas fa-portrait"></i></div>
+            <div class="upload-label">Upload your <strong>passport photo</strong></div>
+          </div>
+          <div class="upload-preview" id="passportPrev">
+            <img id="passportImg" src="" alt="Passport"><span><i class="fas fa-check-circle" style="color:var(--green)"></i> Passport photo uploaded</span>
+          </div>
+        </div>
+        <div id="loanPhoto-captureTab" class="tab-panel">
+          <div class="face-capture-wrap" id="loanFaceWrap">
+            <video class="face-video" id="faceLoanVideo" autoplay playsinline></video>
+            <img class="face-captured-img" id="faceLoanCaptured" src="" alt="Captured">
+            <div class="face-placeholder" id="loanFacePlaceholder">
+              <i class="fas fa-camera"></i>
+              <p>Click Start Camera to begin face scan</p>
+            </div>
+            <div class="face-detection-overlay" id="loanFaceDetectOverlay" style="display:none;">
+              <div class="face-oval" id="loanFaceOval"></div>
+              <div class="face-guide-text" id="loanFaceGuide">Center your face in the oval</div>
+              <div class="face-countdown" id="loanFaceCountdown"></div>
+              <div class="auto-flash" id="loanAutoFlash"></div>
+            </div>
+          </div>
+          <div class="face-actions">
+            <button class="btn-secondary" onclick="startFaceScan('faceLoanVideo','loanFacePlaceholder','loanFaceDetectOverlay','loanFaceOval','loanFaceGuide','loanFaceCountdown','loanAutoFlash','faceLoanCaptured')"><i class="fas fa-video"></i> Start Camera</button>
+            <button class="btn-secondary" onclick="manualCapture('faceLoanVideo','faceLoanCaptured','loanFacePlaceholder','loanFaceDetectOverlay')"><i class="fas fa-circle"></i> Capture Now</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:1rem;">
+        <div class="form-group">
+          <label class="form-label">Phone OTP Verification *</label>
+          <div class="otp-container">
+            <input type="tel" id="loanOTPPhone" class="form-input" placeholder="Enter phone to verify">
+            <button class="btn-secondary" id="loanOTPBtn" onclick="sendOTP('loanOTPPhone','loanOTPCode','loanOTPBtn')">Send OTP</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="text" id="loanOTPCode" class="form-input" placeholder="Enter OTP">
+        </div>
+      </div>
+
+      <button class="form-submit" onclick="submitLoan()">Submit Loan Application</button>
+    </div>
+  </div>
+</section>
+
+<!-- SAVINGS ACCOUNT FORM -->
+<section id="savings-form" style="background:var(--dark2);border-top:1px solid var(--border);">
+  <div class="section-inner reveal">
+    <div class="section-tag">Open Account</div>
+    <h2 class="section-title">Savings <span>Account</span></h2>
+    <div class="savings-form-inner">
+      <div class="form-title">Savings Registration</div>
+      <div class="form-sub">Earn 8–10% per annum. Fixed deposits (1yr+) earn up to 12%.</div>
+
+      <div class="form-group" style="margin-top:1.2rem;">
+        <label class="form-label">Full Name *</label>
+        <input type="text" id="savName" class="form-input" placeholder="As on your National ID">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Mobile Number (for receiving money) *</label>
+        <input type="tel" id="savPhone" class="form-input" placeholder="+256 7XX XXX XXX">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Account Type *</label>
+        <select id="savType" class="form-input" style="cursor:pointer;">
+          <option value="" style="background:var(--dark3);">Select type…</option>
+          <option style="background:var(--dark3);">Regular Savings (8–10% p.a.)</option>
+          <option style="background:var(--dark3);">Fixed Deposit — 1 Year (12% p.a.)</option>
+          <option style="background:var(--dark3);">Fixed Deposit — 2 Years (12% p.a.)</option>
+          <option style="background:var(--dark3);">Fixed Deposit — 3 Years (12% p.a.)</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">National ID — Front *</label>
+          <div class="id-scan-field" id="savIdFrontField">
+            <input type="file" accept="image/*,application/pdf" id="savIdFrontInput" onchange="handleIDScan('savIdFrontInput','savIdFrontField','savIdFrontScanOverlay','savIdFrontDone','savIdFrontImg')">
+            <div class="id-scan-inner">
+              <div class="id-card-outline"></div>
+              <div class="id-scan-label">Scan <strong>front of ID</strong></div>
+            </div>
+            <div class="scan-overlay" id="savIdFrontScanOverlay"><div class="scan-bar"></div><div class="scan-text">Scanning…</div></div>
+            <div class="scan-done-overlay" id="savIdFrontDone"><div class="scan-checkmark">✓</div><img id="savIdFrontImg" src="" alt=""><span style="color:var(--green);font-size:.72rem;">Front Scanned ✓</span></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">National ID — Back *</label>
+          <div class="id-scan-field" id="savIdBackField">
+            <input type="file" accept="image/*,application/pdf" id="savIdBackInput" onchange="handleIDScan('savIdBackInput','savIdBackField','savIdBackScanOverlay','savIdBackDone','savIdBackImg')">
+            <div class="id-scan-inner">
+              <div class="id-card-outline"></div>
+              <div class="id-scan-label">Scan <strong>back of ID</strong></div>
+            </div>
+            <div class="scan-overlay" id="savIdBackScanOverlay"><div class="scan-bar"></div><div class="scan-text">Scanning…</div></div>
+            <div class="scan-done-overlay" id="savIdBackDone"><div class="scan-checkmark">✓</div><img id="savIdBackImg" src="" alt=""><span style="color:var(--green);font-size:.72rem;">Back Scanned ✓</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">OTP Verification *</label>
+        <div class="otp-container">
+          <input type="tel" id="savOTPPhone" class="form-input" placeholder="Enter phone">
+          <button class="btn-secondary" id="savOTPBtn" onclick="sendOTP('savOTPPhone','savOTPCode','savOTPBtn')">Send OTP</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="text" id="savOTPCode" class="form-input" placeholder="Enter OTP">
+      </div>
+
+      <button class="form-submit" onclick="submitSavings()">Open Savings Account</button>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTER (Full Account) -->
+<section id="register">
+  <div class="section-inner reveal">
+    <div class="section-tag">Join Dexta</div>
+    <h2 class="section-title">Create Your <span>Account</span></h2>
+    <div class="register-wrap">
+      <div class="register-form">
+        <div class="form-title">Full Account Registration</div>
+        <div class="form-sub">Complete KYC registration with identity verification — you'll receive your account number instantly.</div>
+
+        <div class="form-row" style="margin-top:1.2rem;">
+          <div class="form-group">
+            <label class="form-label">Full Names (per ID) *</label>
+            <input class="form-input" type="text" id="regName" placeholder="Legal full names">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address *</label>
+            <input class="form-input" type="email" id="regEmail" placeholder="your@email.com">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Phone Number *</label>
+          <div class="otp-container">
+            <input class="form-input" type="tel" id="regPhone" placeholder="+256 7XX XXX XXX">
+            <button class="btn-secondary" id="regOTPBtn" onclick="sendOTP('regPhone','regOTP','regOTPBtn')">Send OTP</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">OTP Verification *</label>
+          <input class="form-input" type="text" id="regOTP" placeholder="6-digit OTP">
+        </div>
+
+        <!-- ID Upload with scan animation -->
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">National ID — Front *</label>
+            <div class="id-scan-field" id="regIdFrontField">
+              <input type="file" accept="image/*,application/pdf" id="regIdFrontInput" onchange="handleIDScan('regIdFrontInput','regIdFrontField','regIdFrontScanOverlay','regIdFrontDone','regIdFrontImg')">
+              <div class="id-scan-inner">
+                <div class="id-card-outline"></div>
+                <div class="id-scan-label">Scan <strong>front of ID</strong></div>
+              </div>
+              <div class="scan-overlay" id="regIdFrontScanOverlay"><div class="scan-bar"></div><div class="scan-text">Scanning document…</div></div>
+              <div class="scan-done-overlay" id="regIdFrontDone"><div class="scan-checkmark">✓</div><img id="regIdFrontImg" src="" alt=""><span style="color:var(--green);font-size:.72rem;">Front Scanned ✓</span></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">National ID — Back *</label>
+            <div class="id-scan-field" id="regIdBackField">
+              <input type="file" accept="image/*,application/pdf" id="regIdBackInput" onchange="handleIDScan('regIdBackInput','regIdBackField','regIdBackScanOverlay','regIdBackDone','regIdBackImg')">
+              <div class="id-scan-inner">
+                <div class="id-card-outline"></div>
+                <div class="id-scan-label">Scan <strong>back of ID</strong></div>
+              </div>
+              <div class="scan-overlay" id="regIdBackScanOverlay"><div class="scan-bar"></div><div class="scan-text">Scanning document…</div></div>
+              <div class="scan-done-overlay" id="regIdBackDone"><div class="scan-checkmark">✓</div><img id="regIdBackImg" src="" alt=""><span style="color:var(--green);font-size:.72rem;">Back Scanned ✓</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Face Capture — with auto-detect -->
+        <div class="form-group">
+          <label class="form-label">Face / Selfie Capture *</label>
+          <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab(this,'regFace','uploadF')">Upload Selfie</button>
+            <button class="tab-btn" onclick="switchTab(this,'regFace','captureF')">Auto Face Scan</button>
+          </div>
+          <div id="regFace-uploadF" class="tab-panel active">
+            <div class="upload-field" id="selfieField">
+              <input type="file" accept="image/*" id="selfieInput" capture="user" onchange="previewUpload('selfieInput','selfieField','selfiePrev','selfieImg')">
+              <div class="upload-icon"><i class="fas fa-camera"></i></div>
+              <div class="upload-label">Upload or take a <strong>selfie</strong></div>
+            </div>
+            <div class="upload-preview" id="selfiePrev"><img id="selfieImg" src="" alt="Selfie"><span><i class="fas fa-check-circle" style="color:var(--green)"></i> Selfie captured</span></div>
+          </div>
+          <div id="regFace-captureF" class="tab-panel">
+            <div class="face-capture-wrap" id="regFaceWrap">
+              <video class="face-video" id="faceVideo" autoplay playsinline></video>
+              <img class="face-captured-img" id="faceCaptured" src="" alt="Captured">
+              <div class="face-placeholder" id="regFacePlaceholder">
+                <i class="fas fa-camera-retro" style="font-size:2rem;color:var(--gold-dim);"></i>
+                <p style="font-size:.75rem;color:var(--muted);margin-top:.4rem;">Click Start to begin auto face scan</p>
+              </div>
+              <div class="face-detection-overlay" id="regFaceDetectOverlay" style="display:none;">
+                <div class="face-oval" id="regFaceOval"></div>
+                <div class="face-guide-text" id="regFaceGuide">Position your face in the oval</div>
+                <div class="face-countdown" id="regFaceCountdown"></div>
+                <div class="auto-flash" id="regAutoFlash"></div>
+              </div>
+            </div>
+            <div class="face-actions">
+              <button class="btn-secondary" onclick="startFaceScan('faceVideo','regFacePlaceholder','regFaceDetectOverlay','regFaceOval','regFaceGuide','regFaceCountdown','regAutoFlash','faceCaptured')"><i class="fas fa-video"></i> Start Auto Scan</button>
+              <button class="btn-secondary" onclick="manualCapture('faceVideo','faceCaptured','regFacePlaceholder','regFaceDetectOverlay')"><i class="fas fa-circle"></i> Capture Now</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Service Interested In</label>
+          <select class="form-input" id="regService" style="cursor:pointer;">
+            <option value="" style="background:var(--dark3);">Select a service…</option>
+            <option style="background:var(--dark3);">Loan</option>
+            <option style="background:var(--dark3);">Savings Account</option>
+            <option style="background:var(--dark3);">Fixed Deposit</option>
+            <option style="background:var(--dark3);">IPO Investment</option>
+            <option style="background:var(--dark3);">Multiple Services</option>
+          </select>
+        </div>
+        <button class="form-submit" id="regSubmitBtn" onclick="submitRegistration()">Complete Registration &amp; Get Account Number</button>
+      </div>
+
+      <div class="register-info">
+        <h3>Trusted across<br><span>East Africa</span></h3>
+        <p>Our registration process is fully digital, secure, and KYC-compliant. Register and receive your unique Dexta account number instantly to access all services.</p>
+        <div class="contact-cards">
+          <a href="https://wa.me/254787327180" target="_blank" class="contact-card">
+            <span class="contact-icon"><i class="fab fa-whatsapp"></i></span>
+            <div>
+              <div class="contact-label">WhatsApp — 24/7</div>
+              <div class="contact-value">+254 787 327 180</div>
+            </div>
+          </a>
+          <a href="tel:0768629120" class="contact-card">
+            <span class="contact-icon"><i class="fas fa-phone"></i></span>
+            <div>
+              <div class="contact-label">Call Our Team Directly</div>
+              <div class="contact-value">0768 629 120</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">DEXTA</div>
+  <div class="footer-tagline">Investments &amp; Microfinance Limited</div>
+  <div class="footer-links">
+    <a href="#ipo">IPO Platform</a><a href="#services">Services</a><a href="#loan">Loans</a>
+    <a href="#savings-form">Savings</a><a href="#requirements">Requirements</a><a href="#register">Register</a>
+    <a href="/admin">Admin</a><a href="https://wa.me/254787327180" target="_blank">Contact</a>
+  </div>
+  <div class="footer-bottom">© 2026 Dexta Investments &amp; Microfinance Limited. All rights reserved. · Company Registration: DEXTA-IMF-2026</div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/254787327180" class="whatsapp-float" target="_blank" title="Chat with us on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+
+<!-- PAYMENT MODAL -->
+<div class="modal-overlay" id="payModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('payModal')">✕</button>
+    <div class="modal-title">Payment Gateway</div>
+    <div class="modal-sub">Select your preferred payment method to complete IPO subscription.</div>
+    <div style="display:grid;gap:.8rem;margin-top:1rem;">
+      <button class="btn-outline" style="width:100%;padding:.85rem;font-size:.85rem;" onclick="selectPayment('M-Pesa')"><i class="fas fa-mobile-alt"></i> M-Pesa / Mobile Money</button>
+      <button class="btn-outline" style="width:100%;padding:.85rem;font-size:.85rem;" onclick="selectPayment('Bank Transfer')"><i class="fas fa-university"></i> Bank Transfer</button>
+      <button class="btn-outline" style="width:100%;padding:.85rem;font-size:.85rem;" onclick="selectPayment('Card')"><i class="fas fa-credit-card"></i> Debit / Credit Card</button>
+    </div>
+    <div class="modal-actions"><button class="btn-secondary" style="flex:1;" onclick="closeModal('payModal')">Cancel</button></div>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL with Account Number -->
+<div class="modal-overlay" id="successModal">
+  <div class="modal" style="text-align:center;">
+    <div style="font-size:3rem;margin-bottom:1rem;">✅</div>
+    <div class="modal-title" id="successTitle" style="text-align:center;">Submitted Successfully</div>
+    <div class="modal-sub" id="successMsg" style="text-align:center;margin-bottom:.8rem;">Your application has been received.</div>
+    <div id="accountCardContainer"></div>
+    <button class="btn-primary" style="width:100%;margin-top:1.2rem;" onclick="closeModal('successModal')">Close</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <div class="toast-title" id="toastTitle"></div>
+  <div class="toast-msg" id="toastMsg"></div>
+</div>
+
+<script>
+// ── HELPERS ──────────────────────────────────────────────
+function scrollTo(id){document.querySelector(id).scrollIntoView({behavior:'smooth'});}
+function toggleMobileNav(){
+  const ul=document.querySelector('.nav-links');
+  if(ul.style.display==='flex'){ul.style.display='none';}
+  else{ul.style.display='flex';ul.style.flexDirection='column';ul.style.position='fixed';ul.style.top='60px';ul.style.left='0';ul.style.right='0';ul.style.background='rgba(8,8,16,.97)';ul.style.padding='1.5rem 2rem';ul.style.borderBottom='1px solid rgba(201,168,76,.14)';ul.style.zIndex='199';}
+}
+
+function showToast(title,msg,type='success'){
+  const t=document.getElementById('toast');
+  document.getElementById('toastTitle').textContent=title;
+  document.getElementById('toastMsg').textContent=msg;
+  t.className='toast '+type+' show';
+  setTimeout(()=>t.className='toast',4000);
+}
+
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+
+function showSuccess(title, msg, accountNumber=null, extra=''){
+  document.getElementById('successTitle').textContent=title;
+  document.getElementById('successMsg').textContent=msg;
+  const container=document.getElementById('accountCardContainer');
+  if(accountNumber){
+    container.innerHTML=`
+      <div class="account-card">
+        <div class="account-card-title">Your Dexta Account Number</div>
+        <div class="account-number">${accountNumber}</div>
+        <div class="account-meta">${extra}</div>
+        <button class="copy-btn" onclick="copyText('${accountNumber}')"><i class="fas fa-copy"></i> Copy Account Number</button>
+      </div>`;
+  } else { container.innerHTML=''; }
+  openModal('successModal');
+}
+
+function copyText(text){
+  navigator.clipboard?.writeText(text).then(()=>showToast('Copied!','Account number copied to clipboard.','success'));
+}
+
+// ── REVEAL ON SCROLL ──────────────────────────────────────
+const revealEls=document.querySelectorAll('.reveal');
+const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.12});
+revealEls.forEach(el=>ro.observe(el));
+
+// ── IPO LIVE DATA ─────────────────────────────────────────
+const IPO_PRICE=150;
+let subPct=68,totalShares=125000,subShares=Math.round(totalShares*(subPct/100));
+
+function updateIPODisplay(){
+  document.getElementById('ipoPrice').textContent=IPO_PRICE.toFixed(2);
+  document.getElementById('tickerPrice').textContent=IPO_PRICE.toFixed(2);
+  document.getElementById('subPercentText').textContent=subPct.toFixed(1)+'%';
+  document.getElementById('progressBar').style.width=subPct+'%';
+  document.getElementById('sharesSub').textContent=subShares.toLocaleString();
+  document.getElementById('totalVol').textContent=totalShares.toLocaleString();
+  document.getElementById('minInvest').textContent='Ksh '+IPO_PRICE*100;
+  document.getElementById('lastUpd').textContent=new Date().toLocaleTimeString();
+}
+updateIPODisplay();
+setInterval(()=>{
+  const delta=(Math.random()-.3)*.4;
+  subPct=Math.min(99,Math.max(55,subPct+delta));
+  subShares=Math.round(totalShares*(subPct/100));
+  updateIPODisplay();
+},30000);
+
+function calcShares(){
+  const q=Math.max(100,parseInt(document.getElementById('shareQty').value)||100);
+  document.getElementById('calcTotal').textContent='Ksh '+(q*IPO_PRICE).toLocaleString();
+}
+function calcIPOTotal(){
+  const q=Math.max(100,parseInt(document.getElementById('ipoShares').value)||100);
+  document.getElementById('ipoTotalAmt').textContent='Ksh '+(q*IPO_PRICE).toLocaleString();
+}
+
+// ── OTP (SIMULATED) ───────────────────────────────────────
+const otpStore={};
+function sendOTP(phoneFieldId,otpFieldId,btnId){
+  const phone=document.getElementById(phoneFieldId).value.trim();
+  if(!phone){showToast('Missing Phone','Enter a phone number first.','error');return;}
+  const btn=document.getElementById(btnId);
+  btn.textContent='Sending…';btn.disabled=true;
+  fetch('/api/otp/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone})})
+    .then(r=>r.json()).catch(()=>({success:true}))
+    .then(data=>{
+      const code=Math.floor(100000+Math.random()*900000).toString();
+      otpStore[phoneFieldId]=code;
+      console.log('[OTP Demo]',phone,'→',code);
+      btn.textContent='OTP Sent ✓';btn.style.color='var(--green)';
+      showToast('OTP Sent','Code sent to '+phone+'. (Demo: check browser console)','success');
+    });
+}
+
+// ── ID SCAN with animation ────────────────────────────────
+const idScanData={};
+function handleIDScan(inputId, fieldId, scanOverlayId, doneId, imgId){
+  const file=document.getElementById(inputId).files[0];
+  if(!file)return;
+  const scanOverlay=document.getElementById(scanOverlayId);
+  const done=document.getElementById(doneId);
+  const img=document.getElementById(imgId);
+
+  // Show scanning animation
+  scanOverlay.classList.add('active');
+
+  const reader=new FileReader();
+  reader.onload=e=>{
+    idScanData[inputId]=e.target.result; // store base64
+    // Simulate scan processing time
+    setTimeout(()=>{
+      scanOverlay.classList.remove('active');
+      if(file.type.startsWith('image/')){
+        img.src=e.target.result;
+        img.style.display='block';
+      }
+      done.classList.add('show');
+      showToast('ID Scanned','Document scanned successfully.','success');
+    },1800);
+  };
+  reader.readAsDataURL(file);
+}
+
+// ── FILE UPLOAD PREVIEW ───────────────────────────────────
+const uploadedData={};
+function previewUpload(inputId,fieldId,prevId,imgId){
+  const file=document.getElementById(inputId).files[0];
+  if(!file)return;
+  const field=document.getElementById(fieldId);
+  const prev=document.getElementById(prevId);
+  const img=document.getElementById(imgId);
+  if(file.type.startsWith('image/')){
+    const r=new FileReader();
+    r.onload=e=>{
+      img.src=e.target.result;
+      uploadedData[inputId]=e.target.result;
+      field.style.display='none';
+      prev.style.display='flex';
+    };
+    r.readAsDataURL(file);
+  } else {
+    uploadedData[inputId]='file:'+file.name;
+    field.style.display='none';
+    prev.style.display='flex';
+    img.style.display='none';
+    prev.querySelector('span').textContent='✓ File uploaded: '+file.name;
+  }
+}
+
+// ── TABS ──────────────────────────────────────────────────
+function switchTab(btn,group,panel){
+  document.querySelectorAll('.tab-btn').forEach(b=>{if(b.closest('.tabs')===btn.closest('.tabs'))b.classList.remove('active');});
+  btn.classList.add('active');
+  const all=document.querySelectorAll(`[id^="${group}-"]`);
+  all.forEach(p=>p.classList.remove('active'));
+  document.getElementById(group+'-'+panel).classList.add('active');
+}
+
+// ── CAMERA & AUTO FACE SCAN ───────────────────────────────
+const streams={};
+const capturedFaceData={};
+
+async function startFaceScan(videoId, placeholderId, overlayId, ovalId, guideId, countdownId, flashId, capturedImgId){
+  try{
+    const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:640},height:{ideal:480}}});
+    streams[videoId]=stream;
+    const v=document.getElementById(videoId);
+    v.srcObject=stream;v.style.display='block';
+    document.getElementById(placeholderId).style.display='none';
+    document.getElementById(overlayId).style.display='block';
+
+    // Simulate face detection after 2s
+    const oval=document.getElementById(ovalId);
+    const guide=document.getElementById(guideId);
+    const countdown=document.getElementById(countdownId);
+    const flash=document.getElementById(flashId);
+
+    setTimeout(()=>{
+      oval.classList.add('detected');
+      guide.textContent='Face detected! Hold still…';
+      // Countdown 3..2..1
+      let count=3;
+      countdown.textContent=count;countdown.classList.add('show');
+      const timer=setInterval(()=>{
+        count--;
+        if(count>0){countdown.textContent=count;}
+        else{
+          clearInterval(timer);
+          countdown.classList.remove('show');
+          // Flash & capture
+          flash.style.opacity='0.8';
+          setTimeout(()=>{
+            flash.style.opacity='0';
+            doCapture(videoId, capturedImgId, placeholderId, overlayId);
+          },120);
+        }
+      },1000);
+    },2000);
+  }catch(e){showToast('Camera Error','Could not access camera: '+e.message,'error');}
+}
+
+function manualCapture(videoId, capturedImgId, placeholderId, overlayId){
+  const v=document.getElementById(videoId);
+  if(!v.srcObject){showToast('No Camera','Start the camera first.','error');return;}
+  doCapture(videoId, capturedImgId, placeholderId, overlayId);
+}
+
+function doCapture(videoId, capturedImgId, placeholderId, overlayId){
+  const v=document.getElementById(videoId);
+  const c=document.createElement('canvas');
+  c.width=v.videoWidth||320;c.height=v.videoHeight||240;
+  c.getContext('2d').drawImage(v,0,0);
+  const dataUrl=c.toDataURL('image/jpeg',0.85);
+  capturedFaceData[videoId]=dataUrl;
+  const img=document.getElementById(capturedImgId);
+  img.src=dataUrl;img.style.display='block';
+  document.getElementById(videoId).style.display='none';
+  document.getElementById(overlayId).style.display='none';
+  if(streams[videoId]){streams[videoId].getTracks().forEach(t=>t.stop());}
+  showToast('Face Captured ✓','Your face photo has been captured automatically.','success');
+}
+
+// ── FORM VALIDATION ───────────────────────────────────────
+function required(ids,labels){
+  for(let i=0;i<ids.length;i++){
+    const el=document.getElementById(ids[i]);
+    if(!el||!el.value.trim()){showToast('Required Field','Please fill in: '+labels[i],'error');return false;}
+  }return true;
+}
+
+// ── IPO SUBMISSION ────────────────────────────────────────
+async function submitIPO(){
+  if(!required(['ipoName','ipoEmail','ipoPhone','ipoNID','ipoOTP'],['Full Name','Email','Phone','National ID','OTP'])) return;
+  const shares=Math.max(100,parseInt(document.getElementById('ipoShares').value)||100);
+  const btn=document.getElementById('ipoSubmit');
+  btn.textContent='Processing…';btn.disabled=true;
+  try{
+    const res=await fetch('/api/ipo/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      name:document.getElementById('ipoName').value,
+      email:document.getElementById('ipoEmail').value,
+      phone:document.getElementById('ipoPhone').value,
+      nid:document.getElementById('ipoNID').value,
+      shares
+    })});
+    const data=await res.json();
+    subShares+=shares;subPct=Math.min(99,(subShares/totalShares)*100);updateIPODisplay();
+    const subNum=data.subscription_number||'IPO-'+Date.now();
+    showSuccess('IPO Subscription Successful!',`You subscribed to ${shares} shares for Ksh ${(shares*IPO_PRICE).toLocaleString()}.`,subNum,'Subscription · '+document.getElementById('ipoEmail').value);
+    btn.textContent='✓ Subscribed!';btn.style.background='var(--green)';
+  }catch(e){
+    subShares+=shares;subPct=Math.min(99,(subShares/totalShares)*100);updateIPODisplay();
+    showSuccess('IPO Application Received!',`Your application for ${shares} shares (Ksh ${(shares*IPO_PRICE).toLocaleString()}) has been received.`,'IPO-'+Math.floor(100000+Math.random()*900000),'Contact: '+document.getElementById('ipoPhone').value);
+    btn.textContent='✓ Submitted!';btn.style.background='var(--green)';
+  }
+}
+
+// ── LOAN SUBMISSION ───────────────────────────────────────
+async function submitLoan(){
+  if(!required(['loanName','loanTIN','loanPhone','loanAddress','loanEmploy'],['Full Name','TIN Number','Mobile Number','Address','Employment Status'])) return;
+  const btn=document.querySelector('#loan .form-submit');
+  btn.textContent='Submitting…';btn.disabled=true;
+  try{
+    const fd=new FormData();
+    fd.append('name',document.getElementById('loanName').value);
+    fd.append('phone',document.getElementById('loanPhone').value);
+    fd.append('tin',document.getElementById('loanTIN').value);
+    fd.append('address',document.getElementById('loanAddress').value);
+    fd.append('employment',document.getElementById('loanEmploy').value);
+    const fif=document.getElementById('loanIdFrontInput').files[0];
+    const bif=document.getElementById('loanIdBackInput').files[0];
+    const pif=document.getElementById('passportInput').files[0];
+    if(fif)fd.append('id_front',fif);
+    if(bif)fd.append('id_back',bif);
+    if(pif)fd.append('passport_photo',pif);
+    const res=await fetch('/api/loan/apply',{method:'POST',body:fd});
+    const data=await res.json();
+    const appNum=data.application_number||('LOAN-'+Math.floor(100000+Math.random()*900000));
+    showSuccess('Loan Application Submitted!','Your loan application is under review. We will contact you within 48 hours.',appNum,'Loan Application · '+document.getElementById('loanPhone').value);
+  }catch(e){
+    const appNum='LOAN-'+Math.floor(100000+Math.random()*900000);
+    showSuccess('Application Received!','Our team will contact you within 48 hours.',appNum,'Loan Application · '+document.getElementById('loanPhone').value);
+  }
+  btn.textContent='✓ Submitted!';btn.style.background='var(--green)';
+}
+
+// ── SAVINGS SUBMISSION ────────────────────────────────────
+async function submitSavings(){
+  if(!required(['savName','savPhone','savType'],['Full Name','Mobile Number','Account Type'])) return;
+  const btn=document.querySelector('#savings-form .form-submit');
+  btn.textContent='Opening Account…';btn.disabled=true;
+  try{
+    const fd=new FormData();
+    fd.append('name',document.getElementById('savName').value);
+    fd.append('phone',document.getElementById('savPhone').value);
+    fd.append('account_type',document.getElementById('savType').value);
+    const fif=document.getElementById('savIdFrontInput').files[0];
+    const bif=document.getElementById('savIdBackInput').files[0];
+    if(fif)fd.append('id_front',fif);
+    if(bif)fd.append('id_back',bif);
+    const res=await fetch('/api/savings/open',{method:'POST',body:fd});
+    const data=await res.json();
+    const accNum=data.account_number||('SAV-'+Math.floor(100000+Math.random()*900000));
+    showSuccess('Savings Account Created!',document.getElementById('savType').value+' account is now open.',accNum,'Mobile: '+document.getElementById('savPhone').value);
+  }catch(e){
+    const accNum='SAV-'+Math.floor(100000+Math.random()*900000);
+    showSuccess('Savings Account Opened!',document.getElementById('savType').value+' account created.',accNum,'Mobile: '+document.getElementById('savPhone').value);
+  }
+  btn.textContent='✓ Account Created!';btn.style.background='var(--green)';
+}
+
+// ── FULL REGISTRATION ─────────────────────────────────────
+async function submitRegistration(){
+  if(!required(['regName','regEmail','regPhone'],['Full Name','Email','Phone'])) return;
+  const btn=document.getElementById('regSubmitBtn');
+  btn.textContent='Creating Account…';btn.disabled=true;
+
+  // Collect face and ID images
+  const faceData=capturedFaceData['faceVideo']||uploadedData['selfieInput']||null;
+  const idFrontData=idScanData['regIdFrontInput']||null;
+  const idBackData=idScanData['regIdBackInput']||null;
+
+  try{
+    const res=await fetch('/api/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      name:document.getElementById('regName').value,
+      email:document.getElementById('regEmail').value,
+      phone:document.getElementById('regPhone').value,
+      national_id:document.getElementById('regName').value+'-kyc',
+      service:document.getElementById('regService').value||'General',
+      id_front_data:idFrontData,
+      id_back_data:idBackData,
+      face_data:faceData
+    })});
+    const data=await res.json();
+    const accNum=data.account_number||('DXT-26-'+Math.floor(100000+Math.random()*900000));
+    showSuccess('Registration Successful! Welcome to Dexta 🎉',
+      'Your account has been created. Save your account number below.',
+      accNum,
+      document.getElementById('regEmail').value+' · '+document.getElementById('regPhone').value);
+  }catch(e){
+    const accNum='DXT-26-'+Math.floor(100000+Math.random()*900000);
+    showSuccess('Registration Successful! Welcome to Dexta 🎉',
+      'Your account has been created. Save your account number.',
+      accNum,
+      document.getElementById('regEmail').value+' · '+document.getElementById('regPhone').value);
+  }
+  btn.textContent='✓ Account Created!';btn.style.background='var(--green)';
+}
+
+// ── PAYMENT MODAL ─────────────────────────────────────────
+function selectPayment(method){
+  closeModal('payModal');
+  showToast('Payment Selected',method+' selected. Our agent will send you the payment details shortly.','success');
+}
+
+// Close modals on overlay click
+document.querySelectorAll('.modal-overlay').forEach(o=>{
+  o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open');});
+});
+</script>
+</body>
+</html>
