@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dexta Admin Panel</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{
+  --gold:#C9A84C;--gold-light:#E8C97A;--gold-dim:#8a6f2e;
+  --dark:#080810;--dark2:#0e0e1a;--dark3:#161624;--dark4:#1e1e30;
+  --text:#E8E8F0;--muted:#7a7a99;--green:#2d9e6b;--red:#c0392b;
+  --orange:#e67e22;--blue:#4c6ec9;--border:rgba(201,168,76,0.14);--radius:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--text);min-height:100vh;}
+#loginPage{display:flex;align-items:center;justify-content:center;min-height:100vh;background:radial-gradient(ellipse 70% 50% at 50% 40%,rgba(201,168,76,.06) 0%,transparent 70%),var(--dark);}
+.login-box{background:var(--dark3);border:1px solid var(--border);border-radius:16px;padding:3rem 2.5rem;max-width:420px;width:100%;text-align:center;}
+.login-logo{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--gold);letter-spacing:.1em;margin-bottom:.3rem;}
+.login-badge{font-size:.68rem;text-transform:uppercase;letter-spacing:.2em;color:var(--muted);margin-bottom:2rem;}
+.login-form{display:flex;flex-direction:column;gap:1rem;}
+.login-input{width:100%;background:var(--dark4);border:1px solid var(--border);border-radius:var(--radius);padding:.8rem 1rem;color:var(--text);font-size:.9rem;font-family:'DM Sans',sans-serif;outline:none;transition:.2s;}
+.login-input:focus{border-color:rgba(201,168,76,.5);}
+.login-input::placeholder{color:var(--muted);}
+.login-btn{background:var(--gold);color:var(--dark);padding:.85rem;border-radius:var(--radius);font-size:.88rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border:none;transition:.25s;font-family:'DM Sans',sans-serif;}
+.login-btn:hover{background:var(--gold-light);}
+.login-btn:disabled{opacity:.6;cursor:not-allowed;}
+.login-err{color:var(--red);font-size:.8rem;margin-top:.4rem;display:none;}
+#adminShell{display:none;}
+.admin-header{position:sticky;top:0;z-index:100;background:rgba(8,8,16,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:.9rem 2rem;display:flex;align-items:center;justify-content:space-between;}
+.admin-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;color:var(--gold);letter-spacing:.1em;}
+.admin-logo span{font-size:.72rem;font-weight:400;color:var(--muted);margin-left:.6rem;font-family:'DM Sans',sans-serif;letter-spacing:.12em;text-transform:uppercase;}
+.header-right{display:flex;gap:.8rem;align-items:center;}
+.btn-logout{background:rgba(192,57,43,.15);color:#e88;border:1px solid rgba(192,57,43,.3);padding:.4rem .9rem;border-radius:var(--radius);font-size:.75rem;cursor:pointer;transition:.2s;font-family:'DM Sans',sans-serif;}
+.btn-logout:hover{background:rgba(192,57,43,.3);}
+.btn-link{background:rgba(201,168,76,.1);color:var(--gold);border:1px solid var(--border);padding:.4rem .9rem;border-radius:var(--radius);font-size:.75rem;text-decoration:none;transition:.2s;display:inline-flex;align-items:center;gap:.4rem;}
+.btn-link:hover{background:rgba(201,168,76,.2);}
+.btn-link.blue{color:#8fa8e8;border-color:rgba(76,110,201,.3);background:rgba(76,110,201,.1);}
+.btn-link.blue:hover{background:rgba(76,110,201,.2);}
+.admin-body{display:flex;min-height:calc(100vh - 57px);}
+.sidebar{width:230px;flex-shrink:0;background:var(--dark2);border-right:1px solid var(--border);padding:1.5rem 0;}
+.sidebar-label{font-size:.62rem;text-transform:uppercase;letter-spacing:.2em;color:var(--muted);padding:.5rem 1.4rem;margin-top:.5rem;}
+.sidebar-item{display:flex;align-items:center;gap:.7rem;padding:.65rem 1.4rem;font-size:.82rem;color:var(--muted);cursor:pointer;transition:.2s;border-left:2px solid transparent;}
+.sidebar-item:hover{color:var(--text);background:rgba(255,255,255,.03);}
+.sidebar-item.active{color:var(--gold);border-left-color:var(--gold);background:rgba(201,168,76,.05);}
+.sidebar-item i{width:16px;text-align:center;font-size:.85rem;}
+.sidebar-badge{margin-left:auto;background:rgba(192,57,43,.2);color:#e88;font-size:.65rem;padding:.1rem .45rem;border-radius:10px;}
+.admin-content{flex:1;padding:2rem;overflow-x:auto;}
+.section-panel{display:none;}
+.section-panel.active{display:block;}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:1.2rem;margin-bottom:2rem;}
+.stat-card{background:var(--dark3);border:1px solid var(--border);border-radius:12px;padding:1.4rem;transition:.2s;}
+.stat-card:hover{border-color:rgba(201,168,76,.3);}
+.stat-card-icon{font-size:1.4rem;color:var(--gold);margin-bottom:.8rem;}
+.stat-card-val{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--text);}
+.stat-card-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-top:.3rem;}
+.stat-card.highlight{border-color:rgba(201,168,76,.25);}
+.table-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.8rem;}
+.table-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--gold);}
+.search-box{background:var(--dark4);border:1px solid var(--border);border-radius:var(--radius);padding:.5rem 1rem;color:var(--text);font-size:.82rem;font-family:'DM Sans',sans-serif;outline:none;min-width:200px;}
+.search-box::placeholder{color:var(--muted);}
+.search-box:focus{border-color:rgba(201,168,76,.4);}
+.table-wrap{overflow-x:auto;background:var(--dark3);border:1px solid var(--border);border-radius:12px;}
+table{width:100%;border-collapse:collapse;min-width:700px;}
+thead{background:var(--dark4);}
+th{padding:.75rem 1rem;text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap;}
+td{padding:.75rem 1rem;font-size:.82rem;color:var(--text);border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,.02);}
+.status-badge{display:inline-block;padding:.2rem .65rem;border-radius:20px;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;}
+.status-pending{background:rgba(230,126,34,.15);color:var(--orange);border:1px solid rgba(230,126,34,.3);}
+.status-approved,.status-confirmed,.status-active{background:rgba(45,158,107,.15);color:var(--green);border:1px solid rgba(45,158,107,.3);}
+.status-rejected{background:rgba(192,57,43,.15);color:#e88;border:1px solid rgba(192,57,43,.3);}
+.action-btns{display:flex;gap:.4rem;flex-wrap:wrap;}
+.action-btn{padding:.3rem .7rem;border-radius:var(--radius);font-size:.7rem;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;transition:.2s;}
+.btn-approve{background:rgba(45,158,107,.2);color:var(--green);}
+.btn-approve:hover{background:rgba(45,158,107,.4);}
+.btn-reject{background:rgba(192,57,43,.2);color:#e88;}
+.btn-reject:hover{background:rgba(192,57,43,.4);}
+.btn-view{background:rgba(201,168,76,.1);color:var(--gold);}
+.btn-view:hover{background:rgba(201,168,76,.25);}
+.btn-edit{background:rgba(76,110,201,.15);color:#8fa8e8;}
+.btn-edit:hover{background:rgba(76,110,201,.3);}
+.acc-num{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:var(--gold);letter-spacing:.04em;}
+.empty-state{text-align:center;padding:3rem;color:var(--muted);font-size:.85rem;}
+.refresh-btn{background:rgba(201,168,76,.1);color:var(--gold);border:1px solid var(--border);padding:.5rem 1rem;border-radius:var(--radius);font-size:.78rem;cursor:pointer;transition:.2s;font-family:'DM Sans',sans-serif;display:inline-flex;align-items:center;gap:.4rem;}
+.refresh-btn:hover{background:rgba(201,168,76,.2);}
+.balance-input{background:var(--dark4);border:1px solid var(--border);border-radius:var(--radius);padding:.32rem .55rem;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.8rem;width:100px;outline:none;}
+.balance-input:focus{border-color:rgba(201,168,76,.5);}
+.ipo-price-box{background:var(--dark3);border:1px solid var(--border);border-radius:12px;padding:1.6rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;}
+.ipo-price-input{background:var(--dark4);border:1px solid var(--border);border-radius:var(--radius);padding:.6rem 1rem;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;max-width:150px;}
+.ipo-price-input:focus{border-color:rgba(201,168,76,.5);}
+.notes-area{width:100%;background:var(--dark4);border:1px solid var(--border);border-radius:var(--radius);padding:.6rem;color:var(--text);font-family:'DM Sans',sans-serif;resize:vertical;min-height:60px;font-size:.82rem;outline:none;}
+.notes-area:focus{border-color:rgba(201,168,76,.4);}
+.loading{text-align:center;padding:2rem;color:var(--muted);}
+.spinner{display:inline-block;width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite;margin-right:.5rem;vertical-align:middle;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.toast{position:fixed;bottom:2rem;right:2rem;z-index:9998;background:var(--dark3);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.5rem;min-width:240px;box-shadow:0 8px 32px rgba(0,0,0,.5);transform:translateY(20px);opacity:0;transition:.3s;pointer-events:none;}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast.success{border-left:3px solid var(--green);}
+.toast.error{border-left:3px solid var(--red);}
+.toast-title{font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:.2rem;}
+.toast-msg{font-size:.76rem;color:var(--muted);}
+.modal-overlay{position:fixed;inset:0;background:rgba(8,8,16,.85);z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:.3s;padding:1rem;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal{background:var(--dark3);border:1px solid var(--border);border-radius:12px;padding:2rem;max-width:600px;width:100%;max-height:88vh;overflow-y:auto;transform:scale(.95);transition:.3s;}
+.modal-overlay.open .modal{transform:scale(1);}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--gold);margin-bottom:1rem;}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;}
+.detail-item label{font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);}
+.detail-item span{display:block;font-size:.88rem;color:var(--text);margin-top:.2rem;word-break:break-all;}
+.detail-img{max-width:100%;border-radius:6px;margin-top:.5rem;border:1px solid var(--border);}
+.modal-footer{margin-top:1.5rem;display:flex;gap:.6rem;flex-wrap:wrap;}
+.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1rem;}
+@media(max-width:900px){.quick-grid{grid-template-columns:1fr;}}
+@media(max-width:768px){.sidebar{display:none;}.admin-body{flex-direction:column;}.stats-grid{grid-template-columns:1fr 1fr;}.detail-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<div id="loginPage">
+  <div class="login-box">
+    <div class="login-logo">DEXTA</div>
+    <div class="login-badge">Admin Portal · Secure Access</div>
+    <div class="login-form">
+      <input type="text" id="adminUser" class="login-input" placeholder="Username" autocomplete="username">
+      <input type="password" id="adminPass" class="login-input" placeholder="Password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+      <button class="login-btn" id="loginBtn" onclick="doLogin()"><i class="fas fa-shield-alt"></i> Sign In to Admin</button>
+      <div class="login-err" id="loginErr"></div>
+    </div>
+    <div style="margin-top:1.5rem;font-size:.72rem;color:var(--muted);"><i class="fas fa-lock" style="color:var(--gold-dim);"></i> Restricted to authorized personnel only.</div>
+  </div>
+</div>
+
+<div id="adminShell">
+  <div class="admin-header">
+    <div class="admin-logo">DEXTA <span>Admin Panel</span></div>
+    <div class="header-right">
+      <a href="/" class="btn-link"><i class="fas fa-globe"></i> View Site</a>
+      <a href="/dashboard" class="btn-link blue"><i class="fas fa-user"></i> User Portal</a>
+      <button class="btn-logout" onclick="doLogout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+  </div>
+
+  <div class="admin-body">
+    <nav class="sidebar">
+      <div class="sidebar-label">Overview</div>
+      <div class="sidebar-item active" onclick="showPanel('dashboard',this)"><i class="fas fa-chart-bar"></i> Dashboard</div>
+      <div class="sidebar-label">Applications</div>
+      <div class="sidebar-item" onclick="showPanel('registrations',this)"><i class="fas fa-users"></i> Registrations <span class="sidebar-badge" id="regBadge">0</span></div>
+      <div class="sidebar-item" onclick="showPanel('loans',this)"><i class="fas fa-hand-holding-usd"></i> Loans <span class="sidebar-badge" id="loanBadge">0</span></div>
+      <div class="sidebar-item" onclick="showPanel('savings',this)"><i class="fas fa-piggy-bank"></i> Savings</div>
+      <div class="sidebar-label">Market</div>
+      <div class="sidebar-item" onclick="showPanel('ipo',this)"><i class="fas fa-chart-line"></i> IPO Subscriptions</div>
+      <div class="sidebar-label">Settings</div>
+      <div class="sidebar-item" onclick="showPanel('ipoSettings',this)"><i class="fas fa-cog"></i> IPO Settings</div>
+    </nav>
+
+    <div class="admin-content">
+      <!-- DASHBOARD -->
+      <div id="panel-dashboard" class="section-panel active">
+        <div class="table-header">
+          <div class="table-title">Dashboard Overview</div>
+          <button class="refresh-btn" onclick="loadAll()"><i class="fas fa-sync-alt"></i> Refresh</button>
+        </div>
+        <div id="statsGrid" class="stats-grid"><div class="loading"><span class="spinner"></span>Loading…</div></div>
+        <div class="quick-grid">
+          <div>
+            <div class="table-title" style="font-size:1.1rem;margin-bottom:.8rem;">Recent Registrations</div>
+            <div class="table-wrap" id="recentRegs"><div class="loading"><span class="spinner"></span></div></div>
+          </div>
+          <div>
+            <div class="table-title" style="font-size:1.1rem;margin-bottom:.8rem;">Recent Loan Applications</div>
+            <div class="table-wrap" id="recentLoans"><div class="loading"><span class="spinner"></span></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REGISTRATIONS -->
+      <div id="panel-registrations" class="section-panel">
+        <div class="table-header">
+          <div class="table-title">All Registrations</div>
+          <div style="display:flex;gap:.6rem;">
+            <input class="search-box" placeholder="Search name, phone, account…" oninput="filterTable(this,'regTable')">
+            <button class="refresh-btn" onclick="loadRegistrations()"><i class="fas fa-sync-alt"></i></button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table id="regTable">
+            <thead><tr><th>Account #</th><th>Name</th><th>Phone</th><th>Email</th><th>Service</th><th>Status</th><th>Registered</th><th>Actions</th></tr></thead>
+            <tbody id="regTableBody"><tr><td colspan="8" class="loading"><span class="spinner"></span>Loading…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- LOANS -->
+      <div id="panel-loans" class="section-panel">
+        <div class="table-header">
+          <div class="table-title">Loan Applications</div>
+          <div style="display:flex;gap:.6rem;">
+            <input class="search-box" placeholder="Search name, phone…" oninput="filterTable(this,'loanTable')">
+            <button class="refresh-btn" onclick="loadLoans()"><i class="fas fa-sync-alt"></i></button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table id="loanTable">
+            <thead><tr><th>App #</th><th>Name</th><th>Phone</th><th>TIN</th><th>Employment</th><th>Docs</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+            <tbody id="loanTableBody"><tr><td colspan="9" class="loading"><span class="spinner"></span>Loading…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SAVINGS -->
+      <div id="panel-savings" class="section-panel">
+        <div class="table-header">
+          <div class="table-title">Savings Accounts</div>
+          <div style="display:flex;gap:.6rem;">
+            <input class="search-box" placeholder="Search name, phone…" oninput="filterTable(this,'savTable')">
+            <button class="refresh-btn" onclick="loadSavings()"><i class="fas fa-sync-alt"></i></button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table id="savTable">
+            <thead><tr><th>Account #</th><th>Name</th><th>Phone</th><th>Type</th><th>Interest</th><th>Balance (Ksh)</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+            <tbody id="savTableBody"><tr><td colspan="9" class="loading"><span class="spinner"></span>Loading…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- IPO -->
+      <div id="panel-ipo" class="section-panel">
+        <div class="table-header">
+          <div class="table-title">IPO Subscriptions</div>
+          <div style="display:flex;gap:.6rem;">
+            <input class="search-box" placeholder="Search email, name…" oninput="filterTable(this,'ipoTable')">
+            <button class="refresh-btn" onclick="loadIPO()"><i class="fas fa-sync-alt"></i></button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table id="ipoTable">
+            <thead><tr><th>Sub #</th><th>Name</th><th>Email</th><th>Phone</th><th>Shares</th><th>Amount</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+            <tbody id="ipoTableBody"><tr><td colspan="9" class="loading"><span class="spinner"></span>Loading…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- IPO SETTINGS -->
+      <div id="panel-ipoSettings" class="section-panel">
+        <div class="table-title" style="margin-bottom:1.5rem;">IPO Settings</div>
+        <div class="ipo-price-box">
+          <div>
+            <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin-bottom:.4rem;">Current IPO Share Price (Ksh)</div>
+            <input type="number" class="ipo-price-input" id="ipoPriceInput" value="150" min="1" step="0.5">
+          </div>
+          <button class="refresh-btn" onclick="updateIPOPrice()" style="margin-left:auto;"><i class="fas fa-save"></i> Update Price</button>
+        </div>
+        <div class="table-wrap" style="padding:1.4rem;">
+          <p style="font-size:.8rem;color:var(--muted);margin-bottom:.6rem;"><strong style="color:var(--text);">Admin Credentials</strong></p>
+          <p style="font-size:.8rem;color:var(--muted);">Username: <code style="color:var(--gold);">admin</code> &nbsp;&nbsp; Password: <code style="color:var(--gold);">Dexta@Admin2026</code></p>
+          <p style="margin-top:.8rem;font-size:.78rem;color:#e88;"><i class="fas fa-exclamation-triangle"></i> Set <code>ADMIN_USER</code> and <code>ADMIN_PASS</code> environment variables before going live.</p>
+          <hr style="border:none;border-top:1px solid var(--border);margin:1rem 0;">
+          <p style="font-size:.8rem;color:var(--muted);margin-bottom:.4rem;"><strong style="color:var(--text);">User Portal</strong></p>
+          <p style="font-size:.8rem;color:var(--muted);">Users log in at <code style="color:var(--gold);">/dashboard</code> using their <strong>Account Number</strong> + registered <strong>Phone Number</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="detailModal">
+  <div class="modal">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+      <div class="modal-title" id="detailTitle">Details</div>
+      <button style="background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;" onclick="closeModal()">✕</button>
+    </div>
+    <div id="detailContent"></div>
+    <div class="modal-footer" id="detailFooter"></div>
+  </div>
+</div>
+<div class="toast" id="toast"><div class="toast-title" id="toastTitle"></div><div class="toast-msg" id="toastMsg"></div></div>
+
+<script>
+let adminToken = localStorage.getItem('dexta_admin_token') || null;
+window.onload = () => { if (adminToken) showAdmin(); };
+
+async function doLogin() {
+  const user = document.getElementById('adminUser').value.trim();
+  const pass = document.getElementById('adminPass').value;
+  if (!user || !pass) { showErr('Please enter username and password.'); return; }
+  const btn = document.getElementById('loginBtn');
+  btn.textContent = 'Signing in…'; btn.disabled = true;
+  try {
+    const res = await fetch('/api/admin/login', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({username:user,password:pass}) });
+    const data = await res.json();
+    if (res.ok && data.token) {
+      adminToken = data.token;
+      localStorage.setItem('dexta_admin_token', adminToken);
+      showAdmin();
+    } else {
+      showErr(data.error || 'Login failed.');
+      btn.innerHTML = '<i class="fas fa-shield-alt"></i> Sign In to Admin'; btn.disabled = false;
+    }
+  } catch(e) {
+    showErr('Server not reachable.');
+    btn.innerHTML = '<i class="fas fa-shield-alt"></i> Sign In to Admin'; btn.disabled = false;
+  }
+}
+function showErr(msg) { const el=document.getElementById('loginErr'); el.textContent=msg; el.style.display='block'; }
+async function doLogout() {
+  try { await api('/api/admin/logout','POST'); } catch(e) {}
+  adminToken=null; localStorage.removeItem('dexta_admin_token');
+  document.getElementById('adminShell').style.display='none';
+  document.getElementById('loginPage').style.display='flex';
+}
+function showAdmin() {
+  document.getElementById('loginPage').style.display='none';
+  document.getElementById('adminShell').style.display='block';
+  loadAll();
+}
+async function api(url, method='GET', body=null) {
+  const opts={method,headers:{'Content-Type':'application/json','x-admin-token':adminToken}};
+  if (body) opts.body=JSON.stringify(body);
+  const res = await fetch(url, opts);
+  if (res.status===401){doLogout();throw new Error('Session expired');}
+  return res.json();
+}
+function showToast(title, msg, type='success') {
+  const t=document.getElementById('toast');
+  document.getElementById('toastTitle').textContent=title;
+  document.getElementById('toastMsg').textContent=msg;
+  t.className='toast '+type+' show';
+  setTimeout(()=>t.className='toast',3500);
+}
+function showPanel(name, el) {
+  document.querySelectorAll('.section-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sidebar-item').forEach(i=>i.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+  if (el) el.classList.add('active');
+}
+function loadAll(){loadStats();loadRegistrations();loadLoans();loadSavings();loadIPO();}
+
+async function loadStats() {
+  try {
+    const d=await api('/api/admin/stats');
+    document.getElementById('regBadge').textContent=d.pending_registrations||0;
+    document.getElementById('loanBadge').textContent=d.pending_loans||0;
+    document.getElementById('statsGrid').innerHTML=`
+      <div class="stat-card highlight"><div class="stat-card-icon"><i class="fas fa-users"></i></div><div class="stat-card-val">${d.registrations}</div><div class="stat-card-label">Registrations</div></div>
+      <div class="stat-card"><div class="stat-card-icon"><i class="fas fa-clock" style="color:var(--orange)"></i></div><div class="stat-card-val">${d.pending_registrations}</div><div class="stat-card-label">Pending Reg.</div></div>
+      <div class="stat-card"><div class="stat-card-icon"><i class="fas fa-hand-holding-usd"></i></div><div class="stat-card-val">${d.loan_applications}</div><div class="stat-card-label">Loan Applications</div></div>
+      <div class="stat-card"><div class="stat-card-icon"><i class="fas fa-piggy-bank"></i></div><div class="stat-card-val">${d.savings_accounts}</div><div class="stat-card-label">Savings Accounts</div></div>
+      <div class="stat-card"><div class="stat-card-icon"><i class="fas fa-chart-line"></i></div><div class="stat-card-val">${d.ipo_subscriptions}</div><div class="stat-card-label">IPO Subscribers</div></div>
+      <div class="stat-card highlight"><div class="stat-card-icon"><i class="fas fa-coins"></i></div><div class="stat-card-val">Ksh ${((d.ipo_volume||0)/1000).toFixed(0)}K</div><div class="stat-card-label">IPO Volume</div></div>`;
+  } catch(e){document.getElementById('statsGrid').innerHTML='<div class="loading">Failed to load stats.</div>';}
+}
+
+async function loadRegistrations() {
+  try {
+    const rows=await api('/api/admin/registrations');
+    const tbody=document.getElementById('regTableBody');
+    if (!rows.length){tbody.innerHTML='<tr><td colspan="8" class="empty-state">No registrations yet.</td></tr>';return;}
+    tbody.innerHTML=rows.map(r=>`
+      <tr>
+        <td><span class="acc-num">${r.account_number||'—'}</span></td>
+        <td>${esc(r.name)}</td><td>${esc(r.phone)}</td>
+        <td style="color:var(--muted);font-size:.78rem;">${esc(r.email||'—')}</td>
+        <td><span class="status-badge status-active">${esc(r.service)}</span></td>
+        <td><span class="status-badge status-${r.status}">${r.status}</span></td>
+        <td style="color:var(--muted);font-size:.75rem;">${fmtDate(r.created_at)}</td>
+        <td><div class="action-btns">
+          <button class="action-btn btn-view" onclick="viewReg(${r.id})"><i class="fas fa-eye"></i> View</button>
+          <button class="action-btn btn-approve" onclick="updateReg(${r.id},'approved')">✓ Approve</button>
+          <button class="action-btn btn-reject" onclick="updateReg(${r.id},'rejected')">✗ Reject</button>
+        </div></td>
+      </tr>`).join('');
+    document.getElementById('recentRegs').innerHTML=`<table><thead><tr><th>Account #</th><th>Name</th><th>Status</th></tr></thead><tbody>
+      ${rows.slice(0,6).map(r=>`<tr><td><span class="acc-num" style="font-size:.82rem;">${r.account_number||'—'}</span></td><td style="font-size:.8rem;">${esc(r.name)}</td><td><span class="status-badge status-${r.status}">${r.status}</span></td></tr>`).join('')}
+    </tbody></table>`;
+  } catch(e){document.getElementById('regTableBody').innerHTML='<tr><td colspan="8" class="empty-state">Failed to load.</td></tr>';}
+}
+
+async function viewReg(id) {
+  const rows=await api('/api/admin/registrations');
+  const r=rows.find(x=>x.id===id);if(!r)return;
+  document.getElementById('detailTitle').textContent='Registration — '+r.name;
+  document.getElementById('detailContent').innerHTML=`
+    <div class="detail-grid">
+      <div class="detail-item"><label>Account Number</label><span class="acc-num">${r.account_number||'—'}</span></div>
+      <div class="detail-item"><label>Status</label><span><span class="status-badge status-${r.status}">${r.status}</span></span></div>
+      <div class="detail-item"><label>Full Name</label><span>${esc(r.name)}</span></div>
+      <div class="detail-item"><label>Email</label><span>${esc(r.email||'—')}</span></div>
+      <div class="detail-item"><label>Phone</label><span>${esc(r.phone)}</span></div>
+      <div class="detail-item"><label>Service</label><span>${esc(r.service)}</span></div>
+      <div class="detail-item"><label>National ID</label><span>${esc(r.national_id||'—')}</span></div>
+      <div class="detail-item"><label>Registered</label><span>${fmtDate(r.created_at)}</span></div>
+      ${r.id_front?`<div class="detail-item" style="grid-column:1/-1"><label>ID Front</label><div><img src="/uploads/${r.id_front}" class="detail-img" onerror="this.style.display='none'"></div></div>`:''}
+      ${r.id_back?`<div class="detail-item" style="grid-column:1/-1"><label>ID Back</label><div><img src="/uploads/${r.id_back}" class="detail-img" onerror="this.style.display='none'"></div></div>`:''}
+      ${r.face_photo?`<div class="detail-item" style="grid-column:1/-1"><label>Face Photo</label><div><img src="/uploads/${r.face_photo}" class="detail-img" style="max-width:160px;" onerror="this.style.display='none'"></div></div>`:''}
+    </div>`;
+  document.getElementById('detailFooter').innerHTML=`
+    <button class="action-btn btn-approve" style="padding:.5rem 1.2rem;" onclick="updateReg(${r.id},'approved');closeModal()">✓ Approve</button>
+    <button class="action-btn btn-reject" style="padding:.5rem 1.2rem;" onclick="updateReg(${r.id},'rejected');closeModal()">✗ Reject</button>
+    <button class="action-btn btn-view" style="padding:.5rem 1.2rem;margin-left:auto;" onclick="closeModal()">Close</button>`;
+  document.getElementById('detailModal').classList.add('open');
+}
+async function updateReg(id,status){
+  try{await api(`/api/admin/registration/${id}`,'PATCH',{status});showToast('Updated',`Registration ${status}.`,status==='approved'?'success':'error');loadRegistrations();loadStats();}
+  catch(e){showToast('Error','Update failed.','error');}
+}
+
+async function loadLoans() {
+  try {
+    const rows=await api('/api/admin/loans');
+    const tbody=document.getElementById('loanTableBody');
+    if(!rows.length){tbody.innerHTML='<tr><td colspan="9" class="empty-state">No loan applications yet.</td></tr>';return;}
+    tbody.innerHTML=rows.map(r=>`
+      <tr>
+        <td><span class="acc-num">${r.application_number||r.id}</span></td>
+        <td>${esc(r.name)}</td><td>${esc(r.phone)}</td>
+        <td style="color:var(--muted);font-size:.78rem;">${esc(r.tin)}</td>
+        <td style="font-size:.78rem;">${esc(r.employment)}</td>
+        <td>${r.id_front?'<i class="fas fa-check-circle" style="color:var(--green)"></i>':'<i class="fas fa-times-circle" style="color:var(--muted)"></i>'} ${r.passport_photo?'<i class="fas fa-portrait" style="color:var(--green)"></i>':'<i class="fas fa-portrait" style="color:var(--muted)"></i>'}</td>
+        <td><span class="status-badge status-${r.status}">${r.status}</span></td>
+        <td style="color:var(--muted);font-size:.75rem;">${fmtDate(r.created_at)}</td>
+        <td><div class="action-btns">
+          <button class="action-btn btn-view" onclick="viewLoan(${r.id})"><i class="fas fa-eye"></i></button>
+          <button class="action-btn btn-approve" onclick="updateLoan(${r.id},'approved','')">✓</button>
+          <button class="action-btn btn-reject" onclick="updateLoan(${r.id},'rejected','')">✗</button>
+        </div></td>
+      </tr>`).join('');
+    document.getElementById('recentLoans').innerHTML=`<table><thead><tr><th>App #</th><th>Name</th><th>Status</th></tr></thead><tbody>
+      ${rows.slice(0,6).map(r=>`<tr><td><span class="acc-num" style="font-size:.82rem;">${r.application_number||r.id}</span></td><td style="font-size:.8rem;">${esc(r.name)}</td><td><span class="status-badge status-${r.status}">${r.status}</span></td></tr>`).join('')}
+    </tbody></table>`;
+  } catch(e){document.getElementById('loanTableBody').innerHTML='<tr><td colspan="9" class="empty-state">Failed to load.</td></tr>';}
+}
+async function viewLoan(id) {
+  const rows=await api('/api/admin/loans');
+  const r=rows.find(x=>x.id===id);if(!r)return;
+  document.getElementById('detailTitle').textContent='Loan Application — '+r.name;
+  document.getElementById('detailContent').innerHTML=`
+    <div class="detail-grid">
+      <div class="detail-item"><label>Application #</label><span class="acc-num">${r.application_number||r.id}</span></div>
+      <div class="detail-item"><label>Status</label><span><span class="status-badge status-${r.status}">${r.status}</span></span></div>
+      <div class="detail-item"><label>Full Name</label><span>${esc(r.name)}</span></div>
+      <div class="detail-item"><label>Phone</label><span>${esc(r.phone)}</span></div>
+      <div class="detail-item"><label>TIN</label><span>${esc(r.tin)}</span></div>
+      <div class="detail-item"><label>Address</label><span>${esc(r.address)}</span></div>
+      <div class="detail-item" style="grid-column:1/-1"><label>Employment</label><span>${esc(r.employment)}</span></div>
+      <div class="detail-item" style="grid-column:1/-1"><label>Admin Notes</label><textarea class="notes-area" id="loanNotes">${esc(r.notes||'')}</textarea></div>
+      ${r.id_front?`<div class="detail-item"><label>ID Front</label><img src="/uploads/${r.id_front}" class="detail-img" onerror="this.style.display='none'"></div>`:''}
+      ${r.id_back?`<div class="detail-item"><label>ID Back</label><img src="/uploads/${r.id_back}" class="detail-img" onerror="this.style.display='none'"></div>`:''}
+      ${r.passport_photo?`<div class="detail-item" style="grid-column:1/-1"><label>Passport Photo</label><img src="/uploads/${r.passport_photo}" class="detail-img" style="max-width:160px;" onerror="this.style.display='none'"></div>`:''}
+    </div>`;
+  document.getElementById('detailFooter').innerHTML=`
+    <button class="action-btn btn-approve" style="padding:.5rem 1.2rem;" onclick="updateLoan(${r.id},'approved',document.getElementById('loanNotes').value);closeModal()">✓ Approve</button>
+    <button class="action-btn btn-reject" style="padding:.5rem 1.2rem;" onclick="updateLoan(${r.id},'rejected',document.getElementById('loanNotes').value);closeModal()">✗ Reject</button>
+    <button class="action-btn btn-view" style="padding:.5rem 1.2rem;margin-left:auto;" onclick="closeModal()">Close</button>`;
+  document.getElementById('detailModal').classList.add('open');
+}
+async function updateLoan(id,status,notes){
+  try{await api(`/api/admin/loan/${id}`,'PATCH',{status,notes:notes||''});showToast('Updated',`Loan ${status}.`,status==='approved'?'success':'error');loadLoans();loadStats();}
+  catch(e){showToast('Error','Update failed.','error');}
+}
+
+async function loadSavings() {
+  try {
+    const rows=await api('/api/admin/savings');
+    const tbody=document.getElementById('savTableBody');
+    if(!rows.length){tbody.innerHTML='<tr><td colspan="9" class="empty-state">No savings accounts yet.</td></tr>';return;}
+    tbody.innerHTML=rows.map(r=>`
+      <tr>
+        <td><span class="acc-num">${r.account_number||r.id}</span></td>
+        <td>${esc(r.name)}</td><td>${esc(r.phone)}</td>
+        <td style="font-size:.78rem;">${esc(r.account_type)}</td>
+        <td style="color:var(--gold);">${r.interest_rate}%</td>
+        <td>
+          <div style="display:flex;align-items:center;gap:.4rem;">
+            <input class="balance-input" type="number" value="${r.balance||0}" id="bal_${r.id}" min="0" step="100">
+            <button class="action-btn btn-edit" onclick="updateBalance(${r.id})"><i class="fas fa-save"></i></button>
+          </div>
+        </td>
+        <td><span class="status-badge status-${r.status}">${r.status}</span></td>
+        <td style="color:var(--muted);font-size:.75rem;">${fmtDate(r.created_at)}</td>
+        <td><div class="action-btns">
+          <button class="action-btn btn-approve" onclick="updateSav(${r.id},'approved')">✓ Activate</button>
+          <button class="action-btn btn-reject" onclick="updateSav(${r.id},'rejected')">✗</button>
+        </div></td>
+      </tr>`).join('');
+  } catch(e){document.getElementById('savTableBody').innerHTML='<tr><td colspan="9" class="empty-state">Failed to load.</td></tr>';}
+}
+async function updateSav(id,status){
+  try{await api(`/api/admin/savings/${id}`,'PATCH',{status});showToast('Updated',`Savings account ${status}.`,'success');loadSavings();}
+  catch(e){showToast('Error','Update failed.','error');}
+}
+async function updateBalance(id){
+  const val=parseFloat(document.getElementById(`bal_${id}`).value)||0;
+  try{await api(`/api/admin/savings/${id}/balance`,'PATCH',{balance:val});showToast('Balance Updated',`Set to Ksh ${val.toLocaleString()}`,'success');}
+  catch(e){showToast('Error','Balance update failed.','error');}
+}
+
+async function loadIPO() {
+  try {
+    const rows=await api('/api/admin/ipo');
+    const tbody=document.getElementById('ipoTableBody');
+    if(!rows.length){tbody.innerHTML='<tr><td colspan="9" class="empty-state">No IPO subscriptions yet.</td></tr>';return;}
+    tbody.innerHTML=rows.map(r=>`
+      <tr>
+        <td><span class="acc-num">${r.subscription_number||r.id}</span></td>
+        <td>${esc(r.name||'—')}</td>
+        <td style="font-size:.78rem;">${esc(r.email)}</td>
+        <td style="font-size:.78rem;">${esc(r.phone||'—')}</td>
+        <td style="font-weight:600;">${(r.shares||0).toLocaleString()}</td>
+        <td style="color:var(--gold);">Ksh ${(r.amount||0).toLocaleString()}</td>
+        <td><span class="status-badge status-${r.status}">${r.status}</span></td>
+        <td style="color:var(--muted);font-size:.75rem;">${fmtDate(r.created_at)}</td>
+        <td><div class="action-btns">
+          <button class="action-btn btn-approve" onclick="updateIPOSub(${r.id},'confirmed')">Confirm</button>
+          <button class="action-btn btn-reject" onclick="updateIPOSub(${r.id},'rejected')">✗</button>
+        </div></td>
+      </tr>`).join('');
+  } catch(e){document.getElementById('ipoTableBody').innerHTML='<tr><td colspan="9" class="empty-state">Failed to load.</td></tr>';}
+}
+async function updateIPOSub(id,status){
+  try{await api(`/api/admin/ipo/${id}`,'PATCH',{status});showToast('Updated',`IPO subscription ${status}.`,'success');loadIPO();}
+  catch(e){showToast('Error','Update failed.','error');}
+}
+async function updateIPOPrice(){
+  const price=parseFloat(document.getElementById('ipoPriceInput').value);
+  if(!price||price<=0){showToast('Invalid','Enter a valid price.','error');return;}
+  try{await api('/api/admin/ipo/price','POST',{price});showToast('Price Updated',`IPO price set to Ksh ${price}`,'success');}
+  catch(e){showToast('Error','Update failed.','error');}
+}
+
+function filterTable(input,tableId){
+  const q=input.value.toLowerCase();
+  document.querySelectorAll(`#${tableId} tbody tr`).forEach(row=>{row.style.display=row.textContent.toLowerCase().includes(q)?'':'none';});
+}
+function closeModal(){document.getElementById('detailModal').classList.remove('open');}
+document.getElementById('detailModal').addEventListener('click',e=>{if(e.target.id==='detailModal')closeModal();});
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function fmtDate(d){if(!d)return'—';return new Date(d).toLocaleString('en-GB',{dateStyle:'short',timeStyle:'short'});}
+</script>
+</body>
+</html>
