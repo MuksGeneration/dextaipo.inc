@@ -12,7 +12,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 // ── ADMIN CREDENTIALS (change these in production!) ─────
 const ADMIN_USERNAME = process.env.ADMIN_USER || 'admin';
@@ -162,9 +162,13 @@ function dbGet(sql, params = []) {
   try {
     const stmt = db.prepare(sql);
     if (params.length) stmt.bind(params);
-    const result = stmt.getAsObject();
+    if (stmt.step()) {
+      const result = stmt.getAsObject();
+      stmt.free();
+      return result;
+    }
     stmt.free();
-    return Object.keys(result).length ? result : null;
+    return null;
   } catch (err) {
     console.error('DB Get Error:', err);
     return null;
@@ -652,7 +656,7 @@ app.get('/health', (req, res) => res.json({ status: 'ok', timestamp: new Date().
 
 // Initialize database and start server
 initDatabase().then(() => {
-  app.listen(PORT, () => {
+  const server = app.listen(PORT, () => {
     console.log(`
 ╔══════════════════════════════════════════════════════════╗
 ║   Dexta Investment Platform — v3.0                       ║
@@ -662,6 +666,18 @@ initDatabase().then(() => {
 ║      Login:   admin / Dexta@Admin2026                    ║
 ╚══════════════════════════════════════════════════════════╝
     `);
+  });
+  
+  server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.log(`Port ${PORT} is busy, trying port ${parseInt(PORT) + 1}...`);
+      app.listen(parseInt(PORT) + 1, () => {
+        console.log(`Server running on port ${parseInt(PORT) + 1}`);
+      });
+    } else {
+      console.error('Server error:', err);
+      process.exit(1);
+    }
   });
 }).catch(err => {
   console.error('Failed to initialize database:', err);
